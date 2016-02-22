@@ -15,7 +15,7 @@ module.exports = function(grunt) {
             },
             js: {
                 files: ['src/**/*.js'],
-                tasks: ['browserify', 'karma', 'eslint', 'bsReload:js']
+                tasks: ['browserify', 'bsReload:js', 'karma', 'eslint']
             },
             test: {
                 files: ['test/**/*.tests.js'],
@@ -45,13 +45,14 @@ module.exports = function(grunt) {
         eslint: {
             target: ['src/**/*.js'],
             options: {
+                fix: true,
                 config: 'eslint.conf.json'
             }
         },
         karma: {
-			unit: {
-				configFile: 'karma.conf.js',
-			}
+            unit: {
+                configFile: 'karma.conf.js',
+            }
         }
     });
 
@@ -60,18 +61,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-browser-sync');
     grunt.loadNpmTasks('grunt-eslint');
     grunt.loadNpmTasks('grunt-karma');
-    //grunt.registerTask('bsInit', function() {
-    //	var done = this.async();
-    //	browserSync({
-    //		server: "."
-    //	}, function (err, bs){
-    //		done();
-    //	});
-    //});
 
-    //grunt.registerTask('bsReload', function() {
-    //	browserSync.reload();
-    //});
     grunt.registerTask('default', ['browserify', 'browserSync', 'watch']);
-	grunt.registerTask('test', ['karma']);
+    grunt.registerTask('test', ['eslint', 'karma']);
 }
