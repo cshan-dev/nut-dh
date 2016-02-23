@@ -22,6 +22,8 @@ To run tests, run `grunt test`. This will first check your code's style, potenti
 
 ## Main Packages
 
+below is the packages used by our default grunt task
+
  * [Browserify](http://browserify.org/) + [babelify](https://github.com/babel/babelify): Transforms and bundles ES6 code into ES5.
  * [Browsersync](https://www.browsersync.io/): Performs the automatic browser reloads.
  * [Eslint](http://eslint.org/): Linter for checking/fixing code style.
