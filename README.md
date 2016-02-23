@@ -1,6 +1,6 @@
 # nut-dh
 
-## Getting Started
+## Getting Started (eric's edit)
 
 First, you need to have [Node.js](https://nodejs.org/en/download/) installed.
 
