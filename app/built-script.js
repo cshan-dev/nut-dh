@@ -2,23 +2,23 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Test = function Test() {
-    _classCallCheck(this, Test);
+  _classCallCheck(this, Test);
 };
 
 ;
 var a = 1,
     b = 2,
     foo = {
-    a: a, b: b
+  a: a, b: b
 },
     sum = function sum() {
-    return a + b;
+  return a + b;
 };
 
 console.log(sum());

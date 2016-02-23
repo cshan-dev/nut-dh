@@ -1,11 +1,11 @@
 class Test {};
 let a = 1,
- 	b = 2,
- 	foo = {
-     	a, b
+    b = 2,
+    foo = {
+        a, b
     },
- 	sum = () => {
-     	return a + b;
+    sum = () => {
+        return a + b;
     };
 
 console.log(sum());
