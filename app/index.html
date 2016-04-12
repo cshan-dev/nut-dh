@@ -4,31 +4,48 @@
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.0.1/pivot.min.css">
 	</head>
 	<body>
-			<header id="header-display"> 
+		<div class="row container-fluid">
+			<header id="header-display" class="text-center"> 
 					<h1>Demo</h1>
-		   	</header>
-
-		<div id="config-panel">
-			<div id="connected-users">
-				<h3>Connected Users</h3>
-				<ul>
-					<li>Jeremy Crenshaw</li>
-				</ul>
+			</header>
+	
+			<div id="results-panel" class="col-md-8 well">
+				<div id="pivot"></div>
 			</div>
+
+			<div id="config-panel" class="col-md-4 hidden-xs visible-md-block visible-lg-block">
+				<div id="connected-users" class="well">
+					<h3>Connected Users</h3>
+					<ul>
+						<li>Jeremy Crenshaw</li>
+						<li>Eric Krizman</li>
+						<li>Mark Bamundo</li>
+						<li>Becca Weinschenk</li>
+						<li>Josh Simmons</li>
+						<li>Corey Shannon</li>
+					</ul>
+				</div>
+			</div>
+	
+			<footer class="col-xs-12 text-center">
+					<div class="well">
+					<span>Property of University of Delaware 2016</span>
+					</div>
+			</footer>
+	
+		<script src="https://code.jquery.com/jquery-2.2.1.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.0.1/pivot.min.js"></script>
+		<script src='built-script.js'></script>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+		
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 		</div>
-
-		<div id="results-panel">
-			<div id="pivot"></div>
-		</div>
-
-		<footer>
-				<span>Property of University of Delaware 2016</span>
-		</footer>
-
-	<script src="https://code.jquery.com/jquery-2.2.1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.0.1/pivot.min.js"></script>
-	<script src='built-script.js'></script>
 	</body>
 </html>
 
