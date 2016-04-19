@@ -33,10 +33,6 @@
 					</div>
 			</footer>
 	
-		<script src="https://code.jquery.com/jquery-2.2.1.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.0.1/pivot.min.js"></script>
-		<script src='built-script.js'></script>
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		
@@ -46,6 +42,15 @@
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 		</div>
+		<div id="output"></div>
+	<script src="https://code.jquery.com/jquery-2.2.1.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.0.1/pivot.min.js"></script>
+	<a href="https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=227H8D&redirect_uri=http://localhost:3000/&scope=activity%20nutrition%20heartrate%20location%20nutrition%20profile%20settings%20sleep%20social%20weight&expires_in=31536000"><button>Authenticate Me</button></a>
+	<button id="getToken">Send Token Request</button>
+	<button id="getInfo">Get Info</button>
+	<p id="data"></p>
 	</body>
+	<script src='built-script.js'></script>
 </html>
 

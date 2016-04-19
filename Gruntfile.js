@@ -16,7 +16,7 @@ module.exports = function(grunt) {
             },
             js: {
                 files: ['src/**/*.js'],
-                tasks: ['browserify', 'bsReload:js', 'karma', 'eslint']
+                tasks: ['browserify', 'bsReload:js']
             },
             test: {
                 files: ['test/**/*.tests.js'],
