@@ -47,7 +47,7 @@ var getAccessToken = function() {
 	var authCode = window.location.search.substring(1).replace('code=', '');
 	xhr.setRequestHeader("Authorization", "Basic " + clientEncoded);
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	var params = "client_id=" + clientId + "&grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost:3000%2F&code=" + authCode;
+	var params = "client_id=" + clientId + "&grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost:3000%2Fpost%5Ftokens&code=" + authCode;
 	xhr.send(params);
 };
 
@@ -68,7 +68,22 @@ var getSteps = function(){
 	xhr.send();
 };
 
-$('#getToken').click(getAccessToken);
-$('#getInfo').click(getSteps);
+var testGet = function(){
+	console.log("test get");
+	var xhr = new XMLHttpRequest();
+	var authCode = window.location.search.substring(1).replace('code=', '');
+	/*
+	xhr.open("POST", "http://localhost:3000/process_get");
+	xhr.setRequestHeader("Authorization", "Basic " + clientEncoded);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	var params = "client_id=" + clientId + "&grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost:3000%2F&code=" + authCode;
+	xhr.send(params);
+	*/
+	$.post("http://localhost:3000/process_get", {encoded: clientEncoded, client: clientId, auth: authCode});
+};
+
+//$('#getToken').click(getAccessToken);
+$('#getToken').click(testGet);
+//$('#getInfo').click(getSteps);
 	
 
