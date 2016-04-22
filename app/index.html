@@ -1,59 +1,298 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 	<head>
-		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.0.1/pivot.min.css">
-	</head>
-	<body>
-		<div class="row container-fluid">
-			<header id="header-display" class="text-center"> 
-					<h1>Demo</h1>
-			</header>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="A custom-built infrastructure for aggregating and organizing activity monitor data">
+		<meta name="author" content="Mark Bamundo, Eric Krizman, Corey Shannon, Josh Simmons, and Rebecca Weinschenk">
+		<link rel="icon" href="favicon.ico">
 	
-			<div id="results-panel" class="col-md-8 well">
-				<div id="pivot"></div>
-			</div>
-
-			<div id="config-panel" class="col-md-4 hidden-xs visible-md-block visible-lg-block">
-				<div id="connected-users" class="well">
-					<h3>Connected Users</h3>
-					<ul>
-						<li>Jeremy Crenshaw</li>
-						<li>Eric Krizman</li>
-						<li>Mark Bamundo</li>
-						<li>Becca Weinschenk</li>
-						<li>Josh Simmons</li>
-						<li>Corey Shannon</li>
-					</ul>
-				</div>
-			</div>
-	
-			<footer class="col-xs-12 text-center">
-					<div class="well">
-					<span>Property of University of Delaware 2016</span>
-					</div>
-			</footer>
-	
-	<script src="https://code.jquery.com/jquery-2.2.1.js"></script>
+		<title>Fitbit Data Manager</title>
+		
+		<script src="https://code.jquery.com/jquery-2.2.1.js"></script>
+		<!-- Bootstrap core CSS -->
+		<link href="style/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+		
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-		
+
 		<!-- Optional theme -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-		
+
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-		</div>
-		<div id="output"></div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.0.1/pivot.min.js"></script>
 
-	<a href="https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=227H8D&redirect_uri=http://localhost:3000/post%5Ftokens&scope=activity%20nutrition%20heartrate%20location%20nutrition%20profile%20settings%20sleep%20social%20weight&expires_in=31536000"><button>Authenticate Me</button></a>
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.0.1/pivot.min.css">
+		
+		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Comfortaa" />
+		
+		<link href='https://fonts.googleapis.com/css?family=Raleway:500' rel='stylesheet' type='text/css'>
+		
+		<!-- Custom styles -->
+		<link href="style/table.css" rel="stylesheet">
+		
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	
+	<body>
+	
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid-corner">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">fitbit data manager</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#">Dashboard</a></li>
+						<li><a href="#">Settings</a></li>
+						<li><a href="#">Profile</a></li>
+						<li><a href="#">Help</a></li>
+					</ul>
+					<form class="navbar-form navbar-right">
+						<input type="text" class="form-control" placeholder="Search...">
+					</form>
+				</div>
+			</div>
+		</nav>
+
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-3 col-md-2 sidebar">
+					<ul class="nav nav-sidebar">
+						<li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+						<li class="active"><a href="#">Reports</a></li>
+						<li class="active"><a href="#">Analytics</a></li>
+						<li class="active"><a href="#">Export</a></li>
+					</ul>
+					<ul class="nav nav-sidebar">
+						<li class="active"><a href="#">Nav item</a></li>
+						<li class="active"><a href="#">Nav item again</a></li>
+						<li class="active"><a href="#">One more nav</a></li>
+						<li class="active"><a href="#">Another nav item</a></li>
+						<li class="active"><a href="#">More navigation</a></li>
+					</ul>
+					<ul class="nav nav-sidebar">
+						<li class="active"><a href="#">Nav item again</a></li>
+						<li class="active"><a href="#">One more nav</a></li>
+						<li class="active"><a href="#">Another nav item</a></li>
+					</ul>
+				</div>
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				
+					<div class="row container-fluid">
+						<header id="header-display" class="text-center"> 
+							<h1>Demo</h1>
+						</header>
+	
+						<div id="results-panel" class="col-md-8 well">
+							<div id="pivot"></div>
+						</div>
+
+						<div id="config-panel" class="col-md-4 hidden-xs visible-md-block visible-lg-block">
+							<div id="connected-users" class="well">
+								<h3>Connected Users</h3>
+								<ul>
+									<li>Jeremy Crenshaw</li>
+									<li>Eric Krizman</li>
+									<li>Mark Bamundo</li>
+									<li>Becca Weinschenk</li>
+									<li>Josh Simmons</li>
+									<li>Corey Shannon</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				
+					<h1 class="page-header">Dashboard</h1>
+
+					<div class="row placeholders">
+						<div class="col-xs-6 col-sm-3 placeholder">
+							<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+							<h4>Label</h4>
+							<span class="text-muted">Something else</span>
+						</div>
+						<div class="col-xs-6 col-sm-3 placeholder">
+							<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+							<h4>Label</h4>
+							<span class="text-muted">Something else</span>
+						</div>
+						<div class="col-xs-6 col-sm-3 placeholder">
+							<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+							<h4>Label</h4>
+							<span class="text-muted">Something else</span>
+						</div>
+						<div class="col-xs-6 col-sm-3 placeholder">
+							<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+							<h4>Label</h4>
+							<span class="text-muted">Something else</span>
+						</div>
+					</div>
+
+					<h2 class="sub-header">Section title</h2>
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Header</th>
+									<th>Header</th>
+									<th>Header</th>
+									<th>Header</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1,001</td>
+									<td>Lorem</td>
+									<td>ipsum</td>
+									<td>dolor</td>
+									<td>sit</td>
+								</tr>
+								<tr>
+									<td>1,002</td>
+									<td>amet</td>
+									<td>consectetur</td>
+									<td>adipiscing</td>
+									<td>elit</td>
+								</tr>
+								<tr>
+									<td>1,003</td>
+									<td>Integer</td>
+									<td>nec</td>
+									<td>odio</td>
+									<td>Praesent</td>
+								</tr>
+								<tr>
+									<td>1,003</td>
+									<td>libero</td>
+									<td>Sed</td>
+									<td>cursus</td>
+									<td>ante</td>
+								</tr>
+								<tr>
+									<td>1,004</td>
+									<td>dapibus</td>
+									<td>diam</td>
+									<td>Sed</td>
+									<td>nisi</td>
+								</tr>
+								<tr>
+									<td>1,005</td>
+									<td>Nulla</td>
+									<td>quis</td>
+									<td>sem</td>
+									<td>at</td>
+								</tr>
+								<tr>
+									<td>1,006</td>
+									<td>nibh</td>
+									<td>elementum</td>
+									<td>imperdiet</td>
+									<td>Duis</td>
+								</tr>
+								<tr>
+									<td>1,007</td>
+									<td>sagittis</td>
+									<td>ipsum</td>
+									<td>Praesent</td>
+									<td>mauris</td>
+								</tr>
+								<tr>
+									<td>1,008</td>
+									<td>Fusce</td>
+									<td>nec</td>
+									<td>tellus</td>
+									<td>sed</td>
+								</tr>
+								<tr>
+									<td>1,009</td>
+									<td>augue</td>
+									<td>semper</td>
+									<td>porta</td>
+									<td>Mauris</td>
+								</tr>
+								<tr>
+									<td>1,010</td>
+									<td>massa</td>
+									<td>Vestibulum</td>
+									<td>lacinia</td>
+									<td>arcu</td>
+								</tr>
+								<tr>
+									<td>1,011</td>
+									<td>eget</td>
+									<td>nulla</td>
+									<td>Class</td>
+									<td>aptent</td>
+								</tr>
+								<tr>
+									<td>1,012</td>
+									<td>taciti</td>
+									<td>sociosqu</td>
+									<td>ad</td>
+									<td>litora</td>
+								</tr>
+								<tr>
+									<td>1,013</td>
+									<td>torquent</td>
+									<td>per</td>
+									<td>conubia</td>
+									<td>nostra</td>
+								</tr>
+								<tr>
+									<td>1,014</td>
+									<td>per</td>
+									<td>inceptos</td>
+									<td>himenaeos</td>
+									<td>Curabitur</td>
+								</tr>
+								<tr>
+									<td>1,015</td>
+									<td>sodales</td>
+									<td>ligula</td>
+									<td>in</td>
+									<td>libero</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>		
+
+	<a href="https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=227H8D&redirect_uri=http://localhost:3000/post%5Ftokens&scope=activity%20nutrition%20heartrate%20location%20nutrition%20profile%20settings%20sleep%20social%20weight&expires_in=31536000"><button id="auth">Authenticate Me</button></a>
 
 	<input type="text" id="start_date" placeholder="Start Date"></input>
 	<input type="text" id="end_date" placeholder="End Date"></input>
 	<button id="getVarInfo">Submit</button>
 
+		<footer class="footer">
+			<div class="container">
+				<p class="text-muted">Property of University of Delaware 2016</p>
+			</div>
+		</footer>
+		
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.0.1/pivot.min.js"></script>
+
+		<!-- Bootstrap core JavaScript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="style/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 	</body>
 	<script src='built-script.js'></script>
 </html>
-

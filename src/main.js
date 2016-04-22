@@ -5,7 +5,7 @@ var data = [
 	["3",21.01,3.5,"Male","No","Sun","Dinner",3],
 	["4",23.68,3.31,"Male","No","Sun","Dinner",2],
 ];
-
+/*
 var utils = $.pivotUtilities;
 var heatmap =  utils.renderers["Heatmap"];
 var sumOverSum =  utils.aggregators["Sum over Sum"];
@@ -17,7 +17,7 @@ $("#output").pivotUI(
     aggregator: sumOverSum(["tip", "total_bill"]),
     renderer: heatmap
   });
-
+*/
 var accessToken = "";
 var refreshToken = "";
 

@@ -2,18 +2,19 @@
 "use strict";
 
 var data = [["row", "total_bill", "tip", "sex", "smoker", "day", "time", "size"], ["1", 16.99, 1.01, "Female", "No", "Sun", "Dinner", 2], ["2", 10.34, 1.66, "Male", "No", "Sun", "Dinner", 3], ["3", 21.01, 3.5, "Male", "No", "Sun", "Dinner", 3], ["4", 23.68, 3.31, "Male", "No", "Sun", "Dinner", 2]];
-
+/*
 var utils = $.pivotUtilities;
-var heatmap = utils.renderers["Heatmap"];
-var sumOverSum = utils.aggregators["Sum over Sum"];
+var heatmap =  utils.renderers["Heatmap"];
+var sumOverSum =  utils.aggregators["Sum over Sum"];
 
-$("#output").pivotUI(data, {
-	rows: ["sex", "smoker"],
-	cols: ["day", "time"],
-	aggregator: sumOverSum(["tip", "total_bill"]),
-	renderer: heatmap
-});
-
+$("#output").pivotUI(
+  data, {
+    rows: ["sex", "smoker"],
+    cols: ["day", "time"],
+    aggregator: sumOverSum(["tip", "total_bill"]),
+    renderer: heatmap
+  });
+*/
 var accessToken = "";
 var refreshToken = "";
 
@@ -43,7 +44,7 @@ var getAccessToken = function getAccessToken() {
 	var authCode = window.location.search.substring(1).replace('code=', '');
 	xhr.setRequestHeader("Authorization", "Basic " + clientEncoded);
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	var params = "client_id=" + clientId + "&grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost:3000%2F&code=" + authCode;
+	var params = "client_id=" + clientId + "&grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost:3000%2Fpost%5Ftokens&code=" + authCode;
 	xhr.send(params);
 };
 
@@ -63,8 +64,23 @@ var getSteps = function getSteps() {
 	xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
 	xhr.send();
 };
-
-$('#getToken').click(getAccessToken);
-$('#getInfo').click(getSteps);
+/*
+$('#getInfo').click(function(){
+	$.get("/heartrate", function(data){
+		console.log('hi');
+		console.log(data);
+	});
+});
+*/
+$('#getVarInfo').click(function () {
+	var start = $('#start_date').val();
+	var end = $('#end_date').val();
+	var act = $('#activity').val();
+	console.log(act);
+	console.log("in main");
+	$.get("/users/-/activity/" + start + "/" + end, function (data) {
+		console.log(data);
+	});
+});
 
 },{}]},{},[1]);
