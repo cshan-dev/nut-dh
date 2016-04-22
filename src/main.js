@@ -28,7 +28,7 @@ var clientSecret = "bf884fa120f3142168a098257e34ea13";
 //used in Authoriation header
 var clientEncoded = "MjI3SDhEOmJmODg0ZmExMjBmMzE0MjE2OGEwOTgyNTdlMzRlYTEz";
 
-var getAccessToken = function() {
+export var getAccessToken = function() {
 	console.log("getting access token");
 	var xhr = new XMLHttpRequest();
 	xhr.onload = function(){
@@ -49,6 +49,7 @@ var getAccessToken = function() {
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	var params = "client_id=" + clientId + "&grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost:3000%2Fpost%5Ftokens&code=" + authCode;
 	xhr.send(params);
+	return accessToken;
 };
 
 //gets users steps dating back 7 days from today
@@ -75,6 +76,7 @@ $('#getInfo').click(function(){
 	});
 });
 */
+
 $('#getVarInfo').click(function(){
 	var start = $('#start_date').val();
 	var end = $('#end_date').val();
@@ -85,3 +87,8 @@ $('#getVarInfo').click(function(){
 		console.log(data);
 	});
 });
+
+export var testTest = function(){
+	return 0;
+}
+

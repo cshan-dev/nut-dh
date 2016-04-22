@@ -1,6 +1,9 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
 var data = [["row", "total_bill", "tip", "sex", "smoker", "day", "time", "size"], ["1", 16.99, 1.01, "Female", "No", "Sun", "Dinner", 2], ["2", 10.34, 1.66, "Male", "No", "Sun", "Dinner", 3], ["3", 21.01, 3.5, "Male", "No", "Sun", "Dinner", 3], ["4", 23.68, 3.31, "Male", "No", "Sun", "Dinner", 2]];
 /*
 var utils = $.pivotUtilities;
@@ -46,8 +49,10 @@ var getAccessToken = function getAccessToken() {
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	var params = "client_id=" + clientId + "&grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost:3000%2Fpost%5Ftokens&code=" + authCode;
 	xhr.send(params);
+	return accessToken;
 };
 
+exports.getAccessToken = getAccessToken;
 //gets users steps dating back 7 days from today
 var getSteps = function getSteps() {
 	console.log("getting activites");
@@ -72,6 +77,7 @@ $('#getInfo').click(function(){
 	});
 });
 */
+
 $('#getVarInfo').click(function () {
 	var start = $('#start_date').val();
 	var end = $('#end_date').val();
@@ -82,5 +88,10 @@ $('#getVarInfo').click(function () {
 		console.log(data);
 	});
 });
+
+var testTest = function testTest() {
+	return 0;
+};
+exports.testTest = testTest;
 
 },{}]},{},[1]);
