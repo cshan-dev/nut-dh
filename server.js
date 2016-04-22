@@ -64,6 +64,21 @@ router.get('/post_tokens', function(req, res){
 
 });
 
+router.get('/heartrate', function(req, res){
+	var xhr = new XMLHttpRequest();
+	xhr.onload = function(){
+		if (this.status == 200){
+			var response = JSON.parse(this.responseText);
+			res.send(response);
+		} else {
+			console.log(this);
+		}
+	};
+	xhr.open("GET", "https://api.fitbit.com/1/user/-/activities/heart/date/2016-04-19/2016-04-20.json");
+	xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
+	xhr.send();
+});
+
 router.listen(PORT, function(){
 	console.log("Server listening on port " + PORT);
 });

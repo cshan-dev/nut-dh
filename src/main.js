@@ -68,8 +68,11 @@ var getSteps = function(){
 	xhr.send();
 };
 
-//$('#getToken').click(getAccessToken);
-//$('#getToken').click(testGet);
-//$('#getInfo').click(getSteps);
+$('#getInfo').click(function(){
+	$.get("/heartrate", function(data){
+		console.log('hi');
+		console.log(data);
+	});
+});
 	
 
