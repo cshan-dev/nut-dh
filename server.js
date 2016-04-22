@@ -79,6 +79,24 @@ router.get('/heartrate', function(req, res){
 	xhr.send();
 });
 
+router.get('/users/-/activity/:begin/:end', function(req, res){
+	var start = req.params.begin;
+	var end = req.params.end;
+	//var act = req.params.activity;
+	var xhr = new XMLHttpRequest();
+	xhr.onload = function(){
+		if (this.status == 200){
+			var response = JSON.parse(this.responseText);
+			res.send(response);
+		} else {
+			console.log(this);
+		}
+	};
+	xhr.open("GET", "https://api.fitbit.com/1/user/-/activities/heart/date/" + start + "/" + end + ".json");
+	xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
+	xhr.send();
+});
+
 router.listen(PORT, function(){
 	console.log("Server listening on port " + PORT);
 });

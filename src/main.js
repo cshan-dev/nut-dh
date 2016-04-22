@@ -67,12 +67,21 @@ var getSteps = function(){
 	xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
 	xhr.send();
 };
-
+/*
 $('#getInfo').click(function(){
 	$.get("/heartrate", function(data){
 		console.log('hi');
 		console.log(data);
 	});
 });
-	
-
+*/
+$('#getVarInfo').click(function(){
+	var start = $('#start_date').val();
+	var end = $('#end_date').val();
+	var act = $('#activity').val();
+	console.log(act);
+	console.log("in main");
+	$.get("/users/-/activity/" + start + "/" + end, function(data){
+		console.log(data);
+	});
+});
