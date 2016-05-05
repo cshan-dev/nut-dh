@@ -193,7 +193,7 @@ html {
 	background-color: #ee3d6e;
 }
 
-#start_date, #end_date, #getVarInfo, #auth{
+#start_date, #end_date, #getHeart, #getSteps, #getData, #interval, #auth{
 	position: relative;
-	left: 500px;
+	left: 250px;
 }
