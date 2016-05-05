@@ -1,3 +1,4 @@
+"use strict"
 var http = require('http');
 var path = require('path');
 var express = require('express');
@@ -20,51 +21,46 @@ router.use(express.static('app'));
 
 //Gets the Authorization Code from when a user authorizes our app
 //Uses the Authorization Code to get the access and refresh tokens for the user
-router.get('/post_tokens', function(req, res){
-	//res.sendFile(__dirname + "/" + "index.html");
-	var url = JSON.parse(JSON.stringify(req._parsedOriginalUrl));
-	var authCode = url.query.replace('code=', '');
-	
-	var xhr = new XMLHttpRequest();
-	xhr.onload = function(){
-		if (this.status == 200){
-			//set tokens
-			console.log("get tokens");
-			var res = JSON.parse(this.responseText);
-			accessToken = res.access_token;
-			refreshToken = res.refresh_token;
-			console.log("Access: " + accessToken);
-			console.log("Refresh: " + refreshToken);
-			console.log("tokens set");
+router.get('/post_tokens', function(req, res) {
+    let results = [];
+    var url = JSON.parse(JSON.stringify(req._parsedOriginalUrl));
+    var authCode = url.query.replace('code=', '');
 
-			var vhr = new XMLHttpRequest();
-			vhr.onload = function(){
-				if (this.status == 200){
-					console.log("get name");
-					var res = JSON.parse(this.responseText);
-					username = res.user.fullName;
-					console.log("Name: " + username);
-					console.log("name set");
-				} else {
-					console.log(this);
-				}
-			};
-			vhr.open("GET", "https://api.fitbit.com/1/user/-/profile.json");
-			vhr.setRequestHeader("Authorization", "Bearer " + accessToken);
-			vhr.send();
-		} else {
-			console.log(this.status);
-			console.log(this);
-		}	
-	};
-	xhr.open("POST", "https://api.fitbit.com/oauth2/token");
-	xhr.setRequestHeader("Authorization", "Basic " + clientEncoded);
-	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	var params = "client_id=" + clientId + "&grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost:3000%2Fpost%5Ftokens&code=" + authCode;
-	xhr.send(params);
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+        if (this.status == 200) {
+            var res = JSON.parse(this.responseText);
 
-	res.redirect("/");
+            var accessToken = res.access_token;
+            var refreshToken = res.refresh_token;
 
+            var vhr = new XMLHttpRequest();
+            vhr.onload = function() {
+                if (this.status == 200) {
+                    var userObj = JSON.parse(this.responseText);
+                    MongoClient.connect(dbURL, (err, db) => {
+                        user.registerUser(res, userObj, db, () => {
+                            db.close()
+                        })
+                    })
+                } else {
+                    console.log('err post status ', this.status);
+                }
+            };
+            vhr.open("GET", "https://api.fitbit.com/1/user/-/profile.json");
+            vhr.setRequestHeader("Authorization", "Bearer " + accessToken);
+            vhr.send();
+        } else {
+            console.log(this);
+        }
+    };
+    xhr.open("POST", "https://api.fitbit.com/oauth2/token");
+    xhr.setRequestHeader("Authorization", "Basic " + clientEncoded);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    var params = "client_id=" + clientId + "&grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost:3000%2Fpost%5Ftokens&code=" + authCode;
+    xhr.send(params);
+
+    res.redirect("/");
 });
 
 //Not for use in final build
