@@ -4,7 +4,9 @@ module.exports = function(grunt) {
         browserSync: {
             dev: {
                 options: {
-                    server: "./app",
+                    //server: "./app",
+    			//this might work
+			proxy: "localhost:3000",
                     background: true
                 }
             }
@@ -64,6 +66,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerTask('default', ['browserify', 'browserSync', 'watch']);
+    grunt.registerTask('build', ['browserify']);
     grunt.registerTask('test', ['karma']);
     grunt.registerTask('lint', ['eslint']);
 }

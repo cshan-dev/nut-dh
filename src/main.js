@@ -28,6 +28,7 @@ var clientSecret = "bf884fa120f3142168a098257e34ea13";
 //used in Authoriation header
 var clientEncoded = "MjI3SDhEOmJmODg0ZmExMjBmMzE0MjE2OGEwOTgyNTdlMzRlYTEz";
 
+//Not used by Mark in current build
 export var getAccessToken = function() {
 	console.log("getting access token");
 	var xhr = new XMLHttpRequest();
@@ -52,6 +53,7 @@ export var getAccessToken = function() {
 	return accessToken;
 };
 
+//Not used by Mark in current build
 //gets users steps dating back 7 days from today
 var getSteps = function(){
 	console.log("getting activites");
@@ -68,22 +70,29 @@ var getSteps = function(){
 	xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
 	xhr.send();
 };
-/*
-$('#getInfo').click(function(){
-	$.get("/heartrate", function(data){
-		console.log('hi');
+
+$('#getHeart').click(function(){
+	var start = "2016-04-16"//$('#start_date').val();
+	var end = "2016-04-20"//$('#end_date').val();
+	$.get("/getHeart/" + start + "/" + end, function(data){
 		console.log(data);
 	});
 });
-*/
 
-$('#getVarInfo').click(function(){
-	var start = $('#start_date').val();
-	var end = $('#end_date').val();
-	var act = $('#activity').val();
-	console.log(act);
-	console.log("in main");
-	$.get("/users/-/activity/" + start + "/" + end, function(data){
+$('#getSteps').click(function(){
+	var start = "2016-04-16"//$('#start_date').val();
+	var end = "2016-04-20"//$('#end_date').val();
+	$.get("/getSteps/" + start + "/" + end, function(data){
+		console.log(data);
+	});
+});
+
+$('#getData').click(function(){
+	var start = "2016-04-20"//$('#start_date').val();
+	var end = "2016-04-20"//$('#end_date').val();
+	var interval = "15min"//$('#interval').val();
+	console.log("getting data");
+	$.get("/getData/" + start + "/" + end + "/" + interval, function(data){
 		console.log(data);
 	});
 });
