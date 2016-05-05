@@ -28,6 +28,7 @@
     "karma-jspm": "^2.1.0",
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-sourcemap-loader": "^0.3.7",
+    "phantomjs": "^2.1.7",
     "phantomjs-prebuilt": "^2.1.4"
   },
   "jspm": {
@@ -41,6 +42,6 @@
     }
   },
   "scripts": {
-	"test": "grunt test"
+    "test": "grunt test"
   }
 }
