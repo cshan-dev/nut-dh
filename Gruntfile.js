@@ -67,6 +67,6 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['browserify', 'browserSync', 'watch']);
     grunt.registerTask('build', ['browserify']);
-    grunt.registerTask('test', ['eslint', 'karma']);
+    grunt.registerTask('test', ['karma']);
     grunt.registerTask('lint', ['eslint']);
 }
