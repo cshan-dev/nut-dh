@@ -11,6 +11,7 @@
 	
 		<title>Fitbit Data Manager</title>
 		
+		<script src="https://code.jquery.com/jquery-2.2.1.js"></script>
 		<!-- Bootstrap core CSS -->
 		<link href="style/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
 		
@@ -270,24 +271,37 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		
+		</div>		
+
+	<!--Button for Authentication-->
+	<a href="https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=227H8D&redirect_uri=http://localhost:3000/post%5Ftokens&scope=activity%20nutrition%20heartrate%20location%20nutrition%20profile%20settings%20sleep%20social%20weight&expires_in=31536000"><button id="auth">Authenticate Me</button></a>
+
+	<!--Input boxes for start and end date-->
+	<input type="text" id="start_date" placeholder="Start Date"></input>
+	<input type="text" id="end_date" placeholder="End Date"></input>
+	<input type="text" id="interval" placeholder="Interval"></input>
+	<!--End input boxes-->
+	<!--Buttons for testing data retrieval-->
+	<br>
+	<button id="getHeart" value="2016-04-20">Heart Data</button>
+	<button id="getSteps" value="2016-04-22">Step Data</button>
+	<button id="getData">Get Data</button>
+	<!--End buttons for testing-->
+
 		<footer class="footer">
 			<div class="container">
 				<p class="text-muted">Property of University of Delaware 2016</p>
 			</div>
 		</footer>
-	
-		<script src="https://code.jquery.com/jquery-2.2.1.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.0.1/pivot.min.js"></script>
-		<script src='built-script.js'></script>
 		
-		
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.0.1/pivot.min.js"></script>
+
 		<!-- Bootstrap core JavaScript
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="style/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 	</body>
+	<script src='built-script.js'></script>
 </html>
