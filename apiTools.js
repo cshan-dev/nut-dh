@@ -10,7 +10,7 @@ exports.callFitbit = (verb, path, userId, accessToken) => {
                 var response = JSON.parse(this.responseText);
                 resolve(response);
             } else {
-                reject("    error status ", this);
+                reject(this);
             }
         }
         xhr.open(verb, path);
