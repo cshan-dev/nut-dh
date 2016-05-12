@@ -137,8 +137,8 @@ html {
 	background-color: #e2e2e2;
 	color: black !important;
 	text-shadow: none !important;
-	font-family: Comfortaa;
-	font-size: 2em;
+	font-family: 'Comfortaa', cursive;
+	font-size: 28px;;
 }
 
 .navbar-right {
