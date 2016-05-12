@@ -56,7 +56,24 @@ module.exports = function(grunt) {
             unit: {
                 configFile: 'karma.conf.js',
             }
-        }
+        },
+		mochaTest: {
+			test: {
+				options: {
+					reporter: 'spec',
+//					require: 'coverage/blanket'
+				},
+				src: ['test/backend/**/*.js']
+			},
+//			coverage: {
+//				options: {
+//					reporter: 'html-cov',
+//					quiet: true,
+//					captureFile: 'coverage.html'
+//				},
+//				src: ['test/backend/**/*.js']
+//			}
+		}
     });
 
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -64,9 +81,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-browser-sync');
     grunt.loadNpmTasks('grunt-eslint');
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-mocha-test');
 
     grunt.registerTask('default', ['browserify', 'browserSync', 'watch']);
     grunt.registerTask('build', ['browserify']);
-    grunt.registerTask('test', ['karma']);
+    grunt.registerTask('test', ['karma', 'mochaTest']);
     grunt.registerTask('lint', ['eslint']);
 }
