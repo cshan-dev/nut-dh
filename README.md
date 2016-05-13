@@ -1,6 +1,6 @@
 # nut-dh
 
-## Getting Started
+## Getting Started (eric's edit)
 
 First, you need to have [Node.js](https://nodejs.org/en/download/) installed.
 
@@ -22,8 +22,12 @@ To run tests, run `grunt test`. This will first check your code's style, potenti
 
 ## Main Packages
 
+below is the packages used by our default grunt task
+
  * [Browserify](http://browserify.org/) + [babelify](https://github.com/babel/babelify): Transforms and bundles ES6 code into ES5.
  * [Browsersync](https://www.browsersync.io/): Performs the automatic browser reloads.
  * [Eslint](http://eslint.org/): Linter for checking/fixing code style.
  * [Karma](https://karma-runner.github.io/0.13/index.html) + [Jasmine](http://jasmine.github.io/2.0/introduction.html) + [PhantomJS](http://phantomjs.org/): Karma runs your Jasmine tests in PhantomJS, a headless browser. For the purposes of this project, Jasmine's documentation will be most helpful.
  * [grunt-contrib-watch](https://github.com/gruntjs/grunt-contrib-watch): Runs tasks on file changes.
+
+ Becca was here :)

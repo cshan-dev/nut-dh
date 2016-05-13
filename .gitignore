@@ -1,1 +1,4 @@
 node_modules/*
+app/built-script.js
+coverage/*
+src/jspm_packages/*
