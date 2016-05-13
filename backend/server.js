@@ -122,11 +122,13 @@ var formatDate = function(date){
 	var year = date.getFullYear();
 	return year + "-" + month + "-" + day;
 }
+exports.formatDate = formatDate;
 
 //Transforms the data from an array to one JSON object
 var dataTransform = function(data){
 	return data;
 };
+exports.dataTransform = dataTransform;
 
 //Sends a specific API request to get user data
 var getActivityData = function(url, sd, ed, interval){
@@ -146,6 +148,7 @@ var getActivityData = function(url, sd, ed, interval){
 		xhr.send();
 	});
 };
+exports.getActivityData = getActivityData;
 
 //Loops through all API calls and all dates in date range
 //Adds all data to the data array
@@ -165,6 +168,7 @@ var loopUrls = function(index, sd, ed, interval, res){
 		}
 	});
 };
+exports.loopUrls = loopUrls;
 
 //Route called to get all user data
 router.get('/getData/:begin/:end/:interval', function(req, res){
