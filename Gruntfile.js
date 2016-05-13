@@ -61,9 +61,9 @@ module.exports = function(grunt) {
 			test: {
 				options: {
 					reporter: 'spec',
-//					require: 'coverage/blanket'
+					require: 'coverage/blanket'
 				},
-				src: ['test/backend/**/*.js']
+//				src: ['test/backend/**/*.js']
 			},
 //			coverage: {
 //				options: {
@@ -73,6 +73,11 @@ module.exports = function(grunt) {
 //				},
 //				src: ['test/backend/**/*.js']
 //			}
+		},
+		mocha_istanbul: {
+			coverage: {
+				src: 'test/backend',
+			}
 		}
     });
 
@@ -82,9 +87,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-eslint');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-mocha-test');
+    grunt.loadNpmTasks('grunt-mocha-istanbul');
 
     grunt.registerTask('default', ['browserify', 'browserSync', 'watch']);
     grunt.registerTask('build', ['browserify']);
-    grunt.registerTask('test', ['karma', 'mochaTest']);
+    grunt.registerTask('mocha', ['mocha_istanbul']);
+    grunt.registerTask('test', ['karma', 'mocha_istanbul']);
     grunt.registerTask('lint', ['eslint']);
 }

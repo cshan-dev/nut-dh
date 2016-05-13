@@ -1,4 +1,5 @@
 var server = require('../../backend/server');
+console.log(server);
 var assert = require('assert'),
 	http = require('http');
 describe('/', function() {
@@ -9,3 +10,4 @@ describe('/', function() {
 			});
 	});
 });
+
