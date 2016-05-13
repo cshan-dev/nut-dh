@@ -13,11 +13,11 @@ var accessToken = "";
 var refreshToken = "";
 var username = "";
 var urls = ["activities/calories", "activities/distance", "activities/minutesSedentary", "activities/minutesLightlyActive", "activities/minutesFairlyActive", "activities/minutesVeryActive", "activities/heart", "activities/steps"];//, "sleep/efficiency", "sleep/minutesAsleep"];
-var PORT=3000;
+var PORT=22205;
 
 router.use(bodyParser.urlencoded({extended: false}));
 
-router.use(express.static('app'));
+router.use(express.static(__dirname + '/app'));
 
 //Gets the Authorization Code from when a user authorizes our app
 //Uses the Authorization Code to get the access and refresh tokens for the user

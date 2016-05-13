@@ -11,11 +11,11 @@ var clientEncoded = "MjI3SDhEOmJmODg0ZmExMjBmMzE0MjE2OGEwOTgyNTdlMzRlYTEz";
 var accessToken = "";
 var refreshToken = "";
 var username = "";
-const PORT=3000;
+const PORT=22205;
 
 router.use(bodyParser.urlencoded({extended: false}));
 
-router.use(express.static('app'));
+router.use(express.static(__dirname + '/app'));
 
 router.get('/post_tokens', function(req, res){
 	//res.sendFile(__dirname + "/" + "index.html");
