@@ -5,6 +5,7 @@ var express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const user = require('./userMaintenance');
 const api = require('./apiTools');
+const mongoRoutes = require('./mongoRoutes');
 var router = express();
 var bodyParser = require('body-parser');
 var $ = require('jquery');
@@ -32,39 +33,58 @@ router.get('/getAllData/:begin/:end/:interval', (req, res) => {
     let max = 0;
     let resultArray = [];
     let promises = [];
+    let sd = new Date(start);
+    let ed = new Date(end);
     user.getUsers({}, (us) => {
-        us.forEach((d) => {
-            let userData = [];
-            urls.forEach((u) => {
-                let url = `https://api.fitbit.com/1/user/${d.encodedId}/${u}/date/${start}/${start}/${interval}.json`;
-                console.log(url);
-                userData.push(api.callFitbit("GET", url, d.encodedId, d.accessToken));
+        while (sd <= ed) {
+            us.forEach((d) => {
+                let userData = [];
+                urls.forEach((u) => {
+                    let url = `https://api.fitbit.com/1/user/${d.encodedId}/${u}/date/${start}/${start}/${interval}.json`;
+                    userData.push(api.callFitbit("GET", url, d.encodedId, d.accessToken));
+                });
+                max++;
+                promises.push(userData);
             });
-            max++;
-            promises.push(userData)
-        });
-        promises.forEach((userArray) => {
-            Promise.all(userArray).then((values) => {
-                resultArray.push(values);
-                fulfilled++;
-            }, (reason) => {
-                console.log(reason);
-            });
-        })
-
-        function finisher() {
-            setTimeout(() => {
-                if (fulfilled === max) {
-                    res.send(resultArray);
-                } else {
-                    console.log('not finished ful: ', fulfilled, " max ", max);
-                    finisher();
-                }
-            }, 500)
+            sd.setDate(sd.getDate() + 1);
+            start = formatDate(sd);
         }
-        finisher();
     });
+    promises.forEach((userArray) => {
+        Promise.all(userArray).then((values) => {
+            let id = values[0].id;
+            values = values.map((d) => d.vals);
+            values = [{
+                "name": id
+            }].concat(values);
+
+            resultArray.push(values);
+            fulfilled++;
+        }, (reason) => {
+            console.log(reason);
+        });
+    });
+
+    function finisher() {
+        setTimeout(() => {
+            if (fulfilled === max) {
+                let transformed = [];
+                transformed = transformed.concat(dataTransform(resultArray[0], start, end, interval));
+                for (let i = 1; i < resultArray.length; i++) {
+                    transformed = transformed.concat(dataTransform(resultArray[i], start, end, interval, false));
+                }
+
+                res.send(transformed);
+
+            } else {
+                console.log('not finished ful: ', fulfilled, " max ", max);
+                finisher();
+            }
+        }, 500)
+    }
+    finisher();
 });
+
 router.get('/getHeartRates', (req, res) => {
     user.getUsers({}, (us) => {
         let results = [];
@@ -183,11 +203,6 @@ var formatDate = function(date) {
     return year + "-" + month + "-" + day;
 }
 
-//Transforms the data from an array to one JSON object
-var dataTransform = function(data) {
-    return data;
-};
-
 //Sends a specific API request to get user data
 var getActivityData = function(url, sd, ed, interval) {
     var start = formatDate(sd);
@@ -240,3 +255,128 @@ router.get('/getData/:begin/:end/:interval', function(req, res) {
 router.listen(PORT, function() {
     console.log("Server listening on port " + PORT);
 });
+
+var padZero = function(num) {
+    if (num < 10) {
+        num = "0" + num;
+    }
+    return num;
+}
+
+//Takes a dateTime object and returns a format usable in the API requests
+var formatDate = function(date) {
+    var month = date.getMonth() + 1;
+    month = padZero(month);
+
+    var day = date.getDate() + 1;
+    day = padZero(day);
+
+    var year = date.getFullYear();
+
+    return year + "-" + month + "-" + day;
+}
+
+var formatDateTime = function(date) {
+    var month = date.getMonth() + 1;
+    month = padZero(month);
+
+    var day = date.getDate();
+    day = padZero(day);
+
+    var year = date.getFullYear();
+
+    var hours = date.getHours();
+    hours = padZero(hours);
+
+    var mins = date.getMinutes();
+    mins = padZero(mins);
+
+    var secs = date.getSeconds();
+    secs = padZero(secs);
+
+    return year + "-" + month + "-" + day + " " + hours + ":" + mins + ":" + secs;
+}
+
+var getProperties = function(obj) {
+    var result = [];
+    for (var key in obj) {
+        result.push(key);
+    }
+    return result;
+}
+
+var mergeData = function(fin, data, index, interval, headers) {
+    if (headers === undefined || headers === true) {
+
+        var finIndex = ((index - 1) % urls.length) + 1;
+    } else {
+        var finIndex = ((index - 1) % urls.length);
+    }
+    console.log(fin, finIndex);
+    var properties = getProperties(data[index]);
+    if (index <= urls.length) {
+        fin[finIndex].push(data[0].name);
+        fin[finIndex].push(properties[0]);
+    }
+
+    var set = data[index][properties[1]].dataset;
+    if (set.length < 1440 / interval) {
+        //do this
+        for (var i = 0; i < 1440 / interval; i++) {
+            fin[finIndex].push(0);
+        }
+        for (var i = 0; i < set.length; i++) {
+            var d = data[index][properties[0]][0].dateTime;
+            var t = set [i].time;
+            var dateTime = d + " " + t;
+            var foundIndex = fin[0].indexOf(dateTime);
+            fin[finIndex][foundIndex] = set [i].value;
+        }
+    } else if (set.length > 1440 / interval) {
+        //error
+    } else {
+        for (var i = 0; i < set.length; i++) {
+            fin[finIndex].push(set [i].value);
+        }
+    }
+}
+
+//Transforms the data from an array to one JSON object
+var dataTransform = function(data, start, end, interval, headers) {
+    var finalData = [];
+    var fields = ["ID", "Activity"];
+
+    var date = new Date(start);
+    date.setDate(date.getDate() + 1);
+    date.setHours(0);
+    var end_date = new Date(end);
+    end_date.setDate(end_date.getDate() + 2);
+    end_date.setHours(0);
+    var span = end_date.getDate() - date.getDate();
+
+    var inter = 0;
+    if (interval == "1min") {
+        inter = 1;
+    } else if (interval == "15min") {
+        inter = 15;
+    }
+
+    if (headers === undefined || headers === true) {
+        while (date < end_date) {
+            fields.push(formatDateTime(date));
+            date.setMinutes(date.getMinutes() + inter);
+        }
+        finalData.push(fields);
+    }
+
+    for (var i = 1; i < data.length / span; i++) {
+        finalData.push([]);
+    }
+
+    for (var i = 1; i < data.length; i++) {
+        mergeData(finalData, data, i, inter, headers);
+    }
+
+    console.log("Transform Done");
+    return finalData;
+};
