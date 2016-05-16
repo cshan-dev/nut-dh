@@ -79,6 +79,7 @@ body {
 }
 .main .page-header {
 	margin-top: 0;
+	font-family: 'Raleway', sans-serif;
 }
 
 
@@ -117,9 +118,10 @@ html {
 }
 
 .footer p {
-	position: absolute;
+	position: relative;
 	top: 20px;
-	left: 650px;
+	text-align: center;
+	left: 100px;
 	font-family: 'Raleway', sans-serif;
 	color: #576569 !important;
 }
@@ -137,8 +139,10 @@ html {
 	background-color: #e2e2e2;
 	color: black !important;
 	text-shadow: none !important;
-	font-family: Comfortaa;
-	font-size: 2em;
+	font-family: 'Comfortaa', cursive;
+	font-size: 28px;;
+	left: 50px;
+	position: relative;
 }
 
 .navbar-right {
@@ -147,12 +151,6 @@ html {
 
 .navbar-brand:hover {
 	color: #00b0b9 !important;
-	text-shadow: none;
-}
-.navbar-inverse .navbar-nav>li>a {
-	color: #576569 !important;
-	font-family: 'Raleway', sans-serif;
-	font-size: 1em;
 	text-shadow: none;
 }
 
@@ -169,11 +167,11 @@ html {
 }
 
 .nav-sidebar {
-	background-color: #41bac3;
+	background-color: #00b0b9;
 }
 
 .sidebar {
-	background-color: #41bac3;
+	background-color: #00b0b9;
 }
 
 .nav-sidebar>li>a {
@@ -193,7 +191,94 @@ html {
 	background-color: #ee3d6e;
 }
 
-#start_date, #end_date, #getHeart, #getSteps, #getData, #interval, #auth{
+.input-label {
+	color: #fff !important;
+	font-family: 'Raleway', sans-serif;
+	font-size: 1em;
+	text-shadow: none;
+}
+
+.input-box:focus {
+	border-color: #ee3d6e;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+}
+
+#fitbit-home-description a.btn.white-solid {
+    background: #fff;
+    color: #ef3d6f;
+    padding: 8px 49px 7px;
+    font-size: 14px;
+}
+#fitbit-home-description a.btn.white-solid:hover {
+	background: #00b0b9;
+	color: #fff;
+}
+a.btn.brd{
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    color: #fff;
+    padding: 8px 20px 7px;
+    border: 3px solid #fff;
+}
+a.btn {
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    margin: 0;
+	font-family: 'Raleway', sans-serif;
+    font-size: 12px;
+    line-height: 15px;
+    color: #f54785;
+    text-decoration: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    z-index: 1;
+	font-weight: bold;
+	width: 75px;
+}
+
+#move {
 	position: relative;
-	left: 250px;
+	right: 33px;
+}
+
+.logo {
+	height: 30px;
+	width: 30px;
+	right: 280px;
+	top: 10px;
+	position: relative;
+}
+
+.move-nav {
+	position: relative;
+	right: 30px;
+}
+
+.navbar-active {
+	color: #00b0b9 !important;
+	text-shadow: none !important;
+	font-family: 'Raleway', sans-serif;
+	font-size: 1em;
+}
+
+.navbar-inactive {
+	color: #576569 !important;
+	font-family: 'Raleway', sans-serif;
+	font-size: 1em;
+	text-shadow: none !important;
+}
+
+#place-logo {
+	position: relative;
+	right: 12px;
+}
+
+#connected-users {
+	font-family: 'Raleway', sans-serif;
+}
+
+.sidebar-active {
+	background-color: #ee3d6e;
 }

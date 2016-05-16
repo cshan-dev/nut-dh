@@ -25,7 +25,7 @@ body {
 	position: relative;
 	height: auto;
 	-webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	padding: 10px;
 	font-size: 16px;
@@ -42,18 +42,6 @@ body {
 	margin-bottom: 10px;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
-}
-
-.contain {
-    background: #fff;
-    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.03);
-    font-size: 13px;
-    line-height: 1.4em;
-    margin: 0 auto;
-    padding: 0 40px;
-    width: 480px;
-	margin-top: 50px;
-	padding-bottom: 50px;
 }
 
 /*
@@ -112,48 +100,80 @@ body {
 	text-shadow: none;
 }
 
-.form-control {
-	color: #576569 !important;
+#container {
+    width: 100%!important;
+    border: medium none;
+}
+#container {
+    position: relative;
+    margin: 0 auto;
+    padding-top: 38px;
+    width: 990px;
+}
+body {
 	font-family: 'Raleway', sans-serif;
-	font-size: 1em;
-	text-shadow: none;
+    color: #626161;
 }
 
-.form-signin-heading {
-	font-family: 'Raleway', sans-serif;
-	text-align: center;
+#fitbit-home-grad-context {
+    display: block;
+    padding-top: 1px;
+    margin-top: -1px;
+    background: #00b0b9;
 }
 
-.checkbox {
+#fitbit-home-description {
+    text-align: center;
+	padding-bottom: 80px;
+}
+
+#fitbit-home-description h1 {
+    font-size: 40px;
+    padding: 55px 0 25px 0;
+    color: #fff;
 	font-family: 'Raleway', sans-serif;
 }
 
-.btn {
-	background-color: #ee3d6e;
+#fitbit-home-description h2 {
+    font-size: 18px;
+    line-height: 1.7;
+    padding: 0 0 35px 0;
+    color: #fff;
+    max-width: 510px;
+    margin: auto;
+}
+#fitbit-home-description a.btn.white-solid {
+    background: #fff;
+    color: #ef3d6f;
+    padding: 8px 49px 7px;
+    font-size: 14px;
+}
+#fitbit-home-description a.btn.white-solid:hover {
+	background: #00b0b9;
+	color: #fff;
+}
+a.btn.brd{
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    color: #fff;
+    padding: 8px 20px 7px;
+    border: 3px solid #fff;
+}
+a.btn {
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    margin: 0;
 	font-family: 'Raleway', sans-serif;
-	border: none;
-	width: 100px;
-	border-radius: 25px;
-	height: 40px;
-	font-size: 13px;
+    font-size: 12px;
+    line-height: 15px;
+    color: #f54785;
+    text-decoration: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    z-index: 1;
 	font-weight: bold;
-	float: right;
-}
-
-.btn:hover {
-	background-color: #DB1255 !important;
-}
-
-.btn:active {
-	background-color: #DB1255 !important;
-}
-
-.btn:focus {
-	background-color: #DB1255 !important;
-}
-
-.btn:active, .btn-lg:active, .btn-primary:active, .btn-block:active, .btn:focus, .btn-lg:focus, .btn-primary:focus, .btn-block:focus {
-	background-color: #DB1255 !important;
 }
 
 .logo {
@@ -187,18 +207,7 @@ html {
 	color: #576569 !important;
 }
 
-
 #place-logo {
 	position: relative;
 	right: 12px;
-}
-
-button a {
-	text-decoration: none;
-	color: white;
-}
-
-button a:hover {
-	text-decoration: none;
-	color: white;
 }
