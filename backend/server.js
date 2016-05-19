@@ -329,7 +329,9 @@ var formatDateTime = function (date) {
 var dataTransform = function (data, start, end, interval, headers) {
     console.log('start and end', start, end);
     let datesbtn = 1 + ((end.getTime() - start.getTime()) / 86400000);
-    end.setDate(end.getDate() + 1)
+	var startCopy = new Date(end.getTime());
+	var endPlus1 = new Date(end.getTime());
+    endPlus1.setDate(endPlus1.getDate() + 1)
     var finalData = [];
     var fields = ["ID", "Activity"];
 
@@ -341,9 +343,9 @@ var dataTransform = function (data, start, end, interval, headers) {
     }
 
     if (headers === undefined || headers === true) {
-        while (start.getTime() < end.getTime()) {
-            fields.push(formatDateTime(start));
-            start.setMinutes(start.getMinutes() + inter);
+        while (startCopy.getTime() < endPlus1.getTime()) {
+            fields.push(formatDateTime(startCopy));
+            startCopy.setMinutes(startCopy.getMinutes() + inter);
         }
         finalData.push(fields);
     }
@@ -351,6 +353,8 @@ var dataTransform = function (data, start, end, interval, headers) {
     console.log("DATA", data);
     for (let i = 1; i < data.length; i++) {
         let urlIndex = Math.floor((i - 1) / datesbtn);
+		console.log("data[i]", data[i]);	
+		console.log("urlIndex", urlIndex, urls[urlIndex]);
         let results = data[i][urls[urlIndex].replace('/', '-') + '-intraday'].dataset.map((d) => d.value);
         results = [data[0].name, urls[urlIndex].replace('/', '-')].concat(results);
         finalData.push(results);
