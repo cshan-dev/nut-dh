@@ -70,224 +70,45 @@
 
 		<div class="container-fluid">
 			<div class="row">
+
 				<div class="col-sm-3 col-md-2 sidebar">
-					<ul class="nav nav-sidebar">
-						<li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-						<li class="active"><a href="#">Reports</a></li>
-						<li class="active"><a href="#">Analytics</a></li>
-						<li class="active"><a href="#">Export</a></li>
-					</ul>
-					<ul class="nav nav-sidebar">
-						<li class="active"><a href="#">Nav item</a></li>
-						<li class="active"><a href="#">Nav item again</a></li>
-						<li class="active"><a href="#">One more nav</a></li>
-						<li class="active"><a href="#">Another nav item</a></li>
-						<li class="active"><a href="#">More navigation</a></li>
-					</ul>
-					<ul class="nav nav-sidebar">
-						<li class="active"><a href="#">Nav item again</a></li>
-						<li class="active"><a href="#">One more nav</a></li>
-						<li class="active"><a href="#">Another nav item</a></li>
-					</ul>
+					<!--Input boxes for start and end date-->
+					<h1 class="input-label">Start Date</h1>
+					<input type="date" id="start_date" class="form-control input-box"></input>
+					<h1 class="input-label">End Date</h1>
+					<input type="date" id="end_date" class="form-control input-box"></input>
+					<h1 class="input-label">Interval</h1>
+					<select id="interval" class="form-control input-box">
+						<option value="minute">Minute-level</option>
+						<option value="hour">Hour-level</option>
+						<option value="day">Day-level</option>
+						<option value="week">Week-level</option>
+					</select>
+					<!--End input boxes-->
+					<!--Buttons for testing data retrieval-->
+					<br>
+					<br>
+					<div id="fitbit-home-description">
+						<a href="index.html" class="btn brd white-solid" alt="Get Data" id="getData"><span id="move">Get Data</span></a>
+						<br>
+						<br>
+						<a href="index.html" class="btn brd white-solid" alt="Export Data" id="getData"><span id="move">Export</span></a>
+					</div>
+					<!--End buttons for testing-->
 				</div>
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				
 					<div class="row container-fluid">
 						<header id="header-display" class="text-center"> 
-							<h1>Demo</h1>
+							<h1>Data Table</h1>
 						</header>
 	
 						<div id="results-panel" class="col-md-8 well">
 							<div id="pivot"></div>
 						</div>
 
-						<div id="config-panel" class="col-md-4 hidden-xs visible-md-block visible-lg-block">
-							<div id="connected-users" class="well">
-								<h3>Connected Users</h3>
-								<ul>
-									<li>Jeremy Crenshaw</li>
-									<li>Eric Krizman</li>
-									<li>Mark Bamundo</li>
-									<li>Becca Weinschenk</li>
-									<li>Josh Simmons</li>
-									<li>Corey Shannon</li>
-								</ul>
-							</div>
-						</div>
 					</div>
-				
-					<h1 class="page-header">Dashboard</h1>
-
-					<div class="row placeholders">
-						<div class="col-xs-6 col-sm-3 placeholder">
-							<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-							<h4>Label</h4>
-							<span class="text-muted">Something else</span>
-						</div>
-						<div class="col-xs-6 col-sm-3 placeholder">
-							<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-							<h4>Label</h4>
-							<span class="text-muted">Something else</span>
-						</div>
-						<div class="col-xs-6 col-sm-3 placeholder">
-							<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-							<h4>Label</h4>
-							<span class="text-muted">Something else</span>
-						</div>
-						<div class="col-xs-6 col-sm-3 placeholder">
-							<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-							<h4>Label</h4>
-							<span class="text-muted">Something else</span>
-						</div>
-					</div>
-
-					<h2 class="sub-header">Section title</h2>
-					<div class="table-responsive">
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th>#</th>
-									<th>Header</th>
-									<th>Header</th>
-									<th>Header</th>
-									<th>Header</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>1,001</td>
-									<td>Lorem</td>
-									<td>ipsum</td>
-									<td>dolor</td>
-									<td>sit</td>
-								</tr>
-								<tr>
-									<td>1,002</td>
-									<td>amet</td>
-									<td>consectetur</td>
-									<td>adipiscing</td>
-									<td>elit</td>
-								</tr>
-								<tr>
-									<td>1,003</td>
-									<td>Integer</td>
-									<td>nec</td>
-									<td>odio</td>
-									<td>Praesent</td>
-								</tr>
-								<tr>
-									<td>1,003</td>
-									<td>libero</td>
-									<td>Sed</td>
-									<td>cursus</td>
-									<td>ante</td>
-								</tr>
-								<tr>
-									<td>1,004</td>
-									<td>dapibus</td>
-									<td>diam</td>
-									<td>Sed</td>
-									<td>nisi</td>
-								</tr>
-								<tr>
-									<td>1,005</td>
-									<td>Nulla</td>
-									<td>quis</td>
-									<td>sem</td>
-									<td>at</td>
-								</tr>
-								<tr>
-									<td>1,006</td>
-									<td>nibh</td>
-									<td>elementum</td>
-									<td>imperdiet</td>
-									<td>Duis</td>
-								</tr>
-								<tr>
-									<td>1,007</td>
-									<td>sagittis</td>
-									<td>ipsum</td>
-									<td>Praesent</td>
-									<td>mauris</td>
-								</tr>
-								<tr>
-									<td>1,008</td>
-									<td>Fusce</td>
-									<td>nec</td>
-									<td>tellus</td>
-									<td>sed</td>
-								</tr>
-								<tr>
-									<td>1,009</td>
-									<td>augue</td>
-									<td>semper</td>
-									<td>porta</td>
-									<td>Mauris</td>
-								</tr>
-								<tr>
-									<td>1,010</td>
-									<td>massa</td>
-									<td>Vestibulum</td>
-									<td>lacinia</td>
-									<td>arcu</td>
-								</tr>
-								<tr>
-									<td>1,011</td>
-									<td>eget</td>
-									<td>nulla</td>
-									<td>Class</td>
-									<td>aptent</td>
-								</tr>
-								<tr>
-									<td>1,012</td>
-									<td>taciti</td>
-									<td>sociosqu</td>
-									<td>ad</td>
-									<td>litora</td>
-								</tr>
-								<tr>
-									<td>1,013</td>
-									<td>torquent</td>
-									<td>per</td>
-									<td>conubia</td>
-									<td>nostra</td>
-								</tr>
-								<tr>
-									<td>1,014</td>
-									<td>per</td>
-									<td>inceptos</td>
-									<td>himenaeos</td>
-									<td>Curabitur</td>
-								</tr>
-								<tr>
-									<td>1,015</td>
-									<td>sodales</td>
-									<td>ligula</td>
-									<td>in</td>
-									<td>libero</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
 		</div>		
-
-	<!--Button for Authentication-->
-	<a href="https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=227H8D&redirect_uri=http://localhost:3000/post%5Ftokens&scope=activity%20nutrition%20heartrate%20location%20nutrition%20profile%20settings%20sleep%20social%20weight&expires_in=31536000"><button id="auth">Authenticate Me</button></a>
-
-	<!--Input boxes for start and end date-->
-	<input type="text" id="start_date" placeholder="Start Date"></input>
-	<input type="text" id="end_date" placeholder="End Date"></input>
-	<input type="text" id="interval" placeholder="Interval"></input>
-	<!--End input boxes-->
-	<!--Buttons for testing data retrieval-->
-	<br>
-	<button id="getHeart" value="2016-04-20">Heart Data</button>
-	<button id="getSteps" value="2016-04-22">Step Data</button>
-	<button id="getData">Get Data</button>
-	<!--End buttons for testing-->
-
 		<footer class="footer">
 			<div class="container">
 				<p class="text-muted">Property of University of Delaware 2016</p>
