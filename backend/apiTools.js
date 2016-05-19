@@ -8,9 +8,12 @@ exports.callFitbit = (verb, path, userId, accessToken) => {
             console.log('status ', this.status, ' ', userId)
             if (this.status == 200) {
                 var response = JSON.parse(this.responseText);
-                resolve(response);
+                resolve({
+                    "vals": response,
+                    "id": userId
+                });
             } else {
-                reject("    error status ", this);
+                reject(this);
             }
         }
         xhr.open(verb, path);

@@ -24,6 +24,10 @@ var refreshToken = "";
 var clientId = "227H8D";
 var clientSecret = "bf884fa120f3142168a098257e34ea13";
 
+function testcalls(){
+	$.get('/getHeartRates')
+}
+
 //[clientId]:[clientSecret] encoded with Base64
 //used in Authoriation header
 var clientEncoded = "MjI3SDhEOmJmODg0ZmExMjBmMzE0MjE2OGEwOTgyNTdlMzRlYTEz";
@@ -88,12 +92,13 @@ $('#getSteps').click(function(){
 });
 
 $('#getData').click(function(){
-	var start = "2016-04-20"//$('#start_date').val();
-	var end = "2016-04-20"//$('#end_date').val();
+	var start = "2016-05-09"//$('#start_date').val();
+	var end = "2016-05-10"//$('#end_date').val();
 	var interval = "15min"//$('#interval').val();
 	console.log("getting data");
-	$.get("/getData/" + start + "/" + end + "/" + interval, function(data){
+	$.get(`/getAllData/${start}/${end}/${interval}`,function(data){// + start + "/" + end + "/" + interval, function(data){
 		console.log(data);
+		$("#pivot").pivotUI(data,{cols:data[0]})
 	});
 });
 
