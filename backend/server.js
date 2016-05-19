@@ -181,7 +181,7 @@ router.get('/post_tokens', function (req, res) {
     xhr.open("POST", "https://api.fitbit.com/oauth2/token");
     xhr.setRequestHeader("Authorization", "Basic " + clientEncoded);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    var params = "client_id=" + clientId + "&grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost:3000%2Fpost%5Ftokens&code=" + authCode;
+    var params = "client_id=" + clientId + "&grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost:22205%2Fpost%5Ftokens&code=" + authCode;
     xhr.send(params);
 
     res.redirect("/");
