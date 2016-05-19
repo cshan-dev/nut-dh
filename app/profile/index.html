@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="A custom-built infrastructure for aggregating and organizing activity monitor data">
+		<meta name="author" content="Mark Bamundo, Eric Krizman, Corey Shannon, Josh Simmons, and Rebecca Weinschenk">
+		<link rel="icon" href="../favicon.ico">
+	
+		<title>Fitbit Data Manager</title>
+		
+		<script src="https://code.jquery.com/jquery-2.2.1.js"></script>
+		<!-- Bootstrap core CSS -->
+		<link href="../style/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+		
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.0.1/pivot.min.css">
+		
+		<link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
+		
+		<link href='https://fonts.googleapis.com/css?family=Raleway:500' rel='stylesheet' type='text/css'>
+		
+		<!-- Custom styles -->
+		<link href="../style/dashboard.css" rel="stylesheet">
+		
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	
+	<body>
+	
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid-corner">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<img src="../logo.png" alt="logo" class="logo">
+					<a class="navbar-brand" href="../index.html"><span id="place-logo">fitbit data manager</span></a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="move-nav"><a href="../index.html" class="navbar-inactive">Dashboard</a></li>
+						<li class="move-nav"><a href="../settings/index.html" class="navbar-inactive">Settings</a></li>
+						<li class="move-nav"><a href="index.html" class="navbar-active">Profile</a></li>
+						<li class="move-nav"><a href="../help/index.html" class="navbar-inactive">Help</a></li>
+					</ul>
+					<form class="navbar-form navbar-right">
+						<input type="text" class="form-control move-nav" placeholder="Search...">
+					</form>
+				</div>
+			</div>
+		</nav>
+
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-3 col-md-2 sidebar">
+					<ul class="nav nav-sidebar">
+						<li class="active"><a href="../overview/index.html">Overview <span class="sr-only">(current)</span></a></li>
+						<li class="active"><a href="../reports/index.html">Reports</a></li>
+						<li class="active"><a href="../analytics/index.html">Analytics</a></li>
+						<li class="active"><a href="">Export</a></li>
+					</ul>
+					<br>
+					<!--Input boxes for start and end date-->
+					<h1 class="input-label">Start Date</h1>
+					<input type="date" id="start_date" class="form-control input-box"></input>
+					<h1 class="input-label">End Date</h1>
+					<input type="date" id="end_date" class="form-control input-box"></input>
+					<h1 class="input-label">Interval</h1>
+					<select id="interval" class="form-control input-box">
+						<option value="volvo">Minute-level</option>
+						<option value="saab">Hour-level</option>
+						<option value="mercedes">Day-level</option>
+						<option value="audi">Week-level</option>
+					</select>
+					<!--End input boxes-->
+					<!--Buttons for testing data retrieval-->
+					<br>
+					<br>
+					<div id="fitbit-home-description">
+						<a href="../index.html" class="btn brd white-solid" alt="Register now" id="getData"><span id="move">Get Data</span></a>
+					</div>
+					<!--End buttons for testing-->
+				</div>
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				
+					<div class="row container-fluid">
+						<h1 class="page-header">Profile</h1>
+	
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer class="footer">
+			<div class="container">
+				<p class="text-muted">&copy;2016 University of Delaware. All rights reserved.<p>
+			</div>
+		</footer>
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.0.1/pivot.min.js"></script>
+
+		<!-- Bootstrap core JavaScript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="style/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+	</body>
+	<script src='built-script.js'></script>
+</html>
