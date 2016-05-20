@@ -95,15 +95,16 @@ $('#getData').click(function(){
 	var end = "2016-05-10"//$('#end_date').val();
 	var interval = "15min"//$('#interval').val();
 	console.log("getting data");
-	var headers = table_data.pop().map((d) => {title: d});
-	$("#dataTable").DataTable({
-		data: table_data,
-		columns: headers
-	});
 	$.get(`/getAllData/${start}/${end}/${interval}`,function(data){// + start + "/" + end + "/" + interval, function(data){
 		console.log(data);
 		console.log(JSON.stringify(data));
 		$("#pivot").pivotUI(data,{cols:data[0]})
+			var headers = table_data.shift();
+			headers = headers.map((d) => { return {title: d} });
+			$("#dataTable").DataTable({
+				data: table_data,
+				columns: headers
+			});
 	});
 });
 
