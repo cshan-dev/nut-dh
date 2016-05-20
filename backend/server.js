@@ -28,6 +28,16 @@ router.use(bodyParser.urlencoded({
 
 router.use(express.static(__dirname + '/../app'));
 
+router.get('/index', function(req, res) {
+	res.sendFile('index.html', { root : path.join(__dirname, '../app')});
+
+});
+
+router.get('/admin', function(req, res) {
+	res.sendFile('index.html', { root : path.join(__dirname, '../app/login')});
+
+})
+
 function getUTC(date) {
     var date_utc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
     return date_utc;

@@ -54,8 +54,27 @@
 						<input type="checkbox" value="remember-me"> Remember me
 					</label>
 				</div>
-				<button class="btn btn-lg btn-primary btn-block" type="submit"><a href="../index.html">SIGN IN</a></button>
+				<button class="btn btn-lg btn-primary btn-block" id="button">SIGN IN</button>
 			</form>
+				<script type="text/javascript">
+					document.querySelector('.form-signin').onsubmit = function() {
+						if(document.querySelector("#inputEmail").value == "admin@udel.edu" 
+								&& document.querySelector("#inputPassword").value == "fitbitpassword"){
+							var xhr = new XMLHttpRequest();
+							xhr.onload = function(){
+								if(this.status == 200){
+									window.location = this.responseURL;
+								} else {
+									console.log(this);
+								}
+							}
+							xhr.open("GET", "/index");
+							xhr.send();
+						} else {
+							alert("incorrect username and/or password");
+						}
+					};
+				</script>
 
 		</div> <!-- /container -->
 		
