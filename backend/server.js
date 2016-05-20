@@ -32,6 +32,8 @@ function getUTC(date) {
     var date_utc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
     return date_utc;
 }
+exports.getUTC = getUTC;
+
 router.get('/getAllData/:begin/:end/:interval', (req, res) => {
     var start = req.params.begin;
     var end = req.params.end;
@@ -207,6 +209,7 @@ router.get('/getHeart/:begin/:end', function (req, res) {
     xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
     xhr.send();
 });
+//tested
 
 //Not for use in final build
 router.get('/getSteps/:begin/:end', function (req, res) {
@@ -230,6 +233,7 @@ router.get('/getSteps/:begin/:end', function (req, res) {
     xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
     xhr.send();
 });
+//tested
 
 var padZero = (val) => val < 10 ? "0" + val : val;
 
@@ -249,6 +253,7 @@ var formatDate = function (date) {
     var year = date.getFullYear();
     return year + "-" + month + "-" + day;
 }
+exports.formatDate = formatDate;
 
 //Sends a specific API request to get user data
 var getActivityData = function (url, sd, ed, interval) {
@@ -268,11 +273,12 @@ var getActivityData = function (url, sd, ed, interval) {
         xhr.send();
     });
 };
+exports.getActivityData = getActivityData;
 
 //Loops through all API calls and all dates in date range
 //Adds all data to the data array
 //Transforms the data into JSON and sends it client side
-var loopUrls = function (index, sd, ed, interval, res) {
+function loopUrls (index, sd, ed, interval, res) {
     getActivityData(urls[index], sd, ed, interval)
         .then(function () {
             if (++index < urls.length) {
@@ -289,6 +295,8 @@ var loopUrls = function (index, sd, ed, interval, res) {
         });
 };
 
+exports.loopUrls = loopUrls;
+
 //Route called to get all user data
 router.get('/getData/:begin/:end/:interval', function (req, res) {
     var start = req.params.begin;
@@ -299,6 +307,7 @@ router.get('/getData/:begin/:end/:interval', function (req, res) {
     data.push(JSON.parse("{\"name\": \"" + username + "\"}"));
     loopUrls(0, sd, ed, interval, res);
 });
+//tested
 
 router.listen(PORT, function () {
     console.log("Server listening on port " + PORT);
@@ -324,6 +333,7 @@ var formatDateTime = function (date) {
 
     return year + "-" + month + "-" + day + " " + hours + ":" + mins + ":" + secs;
 }
+exports.formatDateTime = formatDateTime;
 
 //Transforms the data from an array to one JSON object
 var dataTransform = function (data, start, end, interval, headers) {
@@ -371,3 +381,4 @@ var dataTransform = function (data, start, end, interval, headers) {
     console.log("Transform Done");
     return final;
 };
+exports.dataTransform = dataTransform;
