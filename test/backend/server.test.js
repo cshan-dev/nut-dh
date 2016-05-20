@@ -49,6 +49,26 @@ describe('/post_tokens', function() {
 	});
 });
 
+describe('/getHeartRates', function() {
+	it('should return 200', function () {
+			var result = http.get('http://localhost:22205/getHeartRates', function(req, res) {
+				assert(result !== null);
+				//done();
+			});
+	});
+});
+
+describe('/getAllData', function() {
+	it('should return 200', function () {
+			var result = http.get('http://localhost:22205/getAllData/:2016-05-12/:2016-05-12/:1min', function(req, res) {
+				assert(result !== null);
+				//done();
+			});
+	});
+});
+
+
+
 
 describe('getUTC', function(){
 	it('shoudnt be null', function(){

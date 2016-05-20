@@ -129,6 +129,7 @@ router.get('/getAllData/:begin/:end/:interval', (req, res) => {
     //	setTimeout(finisher, 0)
     //finisher();
 });
+//tested
 
 router.get('/getHeartRates', (req, res) => {
     user.getUsers({}, (us) => {
@@ -144,6 +145,7 @@ router.get('/getHeartRates', (req, res) => {
             });
     });
 });
+//tested
 
 //Gets the Authorization Code from when a user authorizes our app
 //Uses the Authorization Code to get the access and refresh tokens for the user
@@ -188,6 +190,7 @@ router.get('/post_tokens', function (req, res) {
 
     res.redirect("/");
 });
+//tested
 
 //Not for use in final build
 router.get('/getHeart/:begin/:end', function (req, res) {
