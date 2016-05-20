@@ -30,11 +30,11 @@ exports.callFitbit = (verb, path, userId, accessToken) => {
 						sendRequest();
 					}
 					userMaintenance.getUsers({"encodedId": userId}, cb);
-                } else if (this.status == 403) {
+                } else if (this.status == 429) {
                     //too many requests
 					var nowTime = new Date();
 					timeTillHour = (61 - nowTime.getMinutes()) * 60 * 1000;
-					console.log("call returned 403 at", nowTime, "calling again in", timeTillHour);
+					console.log("call returned 429 at", nowTime, "calling again in", timeTillHour);
                     setTimeout(sendRequest, timeTillHour);
                 } else {
                     reject(this);
