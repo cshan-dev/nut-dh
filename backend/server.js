@@ -17,8 +17,8 @@ var clientEncoded = "MjI3SDhEOmJmODg0ZmExMjBmMzE0MjE2OGEwOTgyNTdlMzRlYTEz";
 var accessToken = "";
 var refreshToken = "";
 var username = "";
-var urls = ["activities/calories", "activities/distance", "activities/minutesSedentary", "activities/minutesLightlyActive", "activities/minutesFairlyActive", "activities/minutesVeryActive", "activities/heart", "activities/steps"];
-//var urls = ["activities/calories"]
+//var urls = ["activities/calories", "activities/distance", "activities/minutesSedentary", "activities/minutesLightlyActive", "activities/minutesFairlyActive", "activities/minutesVeryActive", "activities/heart", "activities/steps"];
+var urls = ["activities/calories"]
 let dbURL = 'mongodb://localhost:27017/tokens';
 const PORT = 22205;
 

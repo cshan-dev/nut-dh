@@ -92,27 +92,43 @@ $('#getSteps').click(function() {
         console.log(data);
     });
 });
+
+let table;
 $('#getData').click(function() {
-    var start = "2016-05-09" //$('#start_date').val();
-    var end = "2016-05-10" //$('#end_date').val();
-    var interval = "15min" //$('#interval').val();
-    console.log("getting data");
-    $.get(`/getAllData/${start}/${end}/${interval}`, function(data) { // + start + "/" + end + "/" + interval, function(data){
+
+    let start = $('#start_date').val();
+    let end = $('#end_date').val();
+    if (start === "") {
+        alert("Please Enter a Valid Start Date!")
+        return;
+    } else if (end === "") {
+        alert("Please Enter a Valid End Date!")
+        return;
+    }
+    let interval = $('#interval').val();
+
+    $.get(`/getAllData/${start}/${end}/${interval}`, function(data) {
         globals.data = data
-            //$("#pivot").pivotUI(data,{cols:globals.data[0]})
         let headers = globals.data[0];
-		console.log("headers",headers);
+        console.log("headers", headers);
         headers = headers.map((d) => {
             return {
                 title: d
             }
         });
         let copied = globals.data.filter((d, i) => i > 0);
-		console.log("copied",copied);
-        $("#dataTable").DataTable({
-            data: copied,
-            columns: headers
-        });
+        console.log("copied", copied);
+        //if ($.fn.dataTable.isDataTable('#dataTable')) {
+        //    table.destroy();
+        //} else {
+            table = $("#dataTable").DataTable({
+                data: copied,
+                dom: 'Bfrtip',
+                buttons: ["copy", "csv", "excel"],
+                columns: headers
+            });
+
+        //}
     });
 });
 
