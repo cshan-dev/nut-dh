@@ -45,7 +45,7 @@ exports.refreshToken = (id) => {
                         }
                     }, db, () => db.close())
                 } else {
-                    console.log('status ', this.status)
+                    console.log('Refresh Token Call: status ', this.status)
                 }
             }
             refresh.open("POST", "https://api.fitbit.com/oauth2/token");

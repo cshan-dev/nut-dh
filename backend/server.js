@@ -84,6 +84,7 @@ router.get('/getAllData/:begin/:end/:interval', (req, res) => {
         promises.forEach((userArray) => {
             Promise.all(userArray)
                 .then((values) => {
+					console.log(values);
                     let id = values[0].id;
                     values = values.map((d) => d.vals);
                     values = [{
@@ -112,7 +113,6 @@ router.get('/getAllData/:begin/:end/:interval', (req, res) => {
                     } else {
                         transformed[i % datesbtn] = transformed.concat(dataTransform(resultArray[i], originalStart, originalEnd, interval, false));
                     }
-                    console.log
                 }
 
                 res.send(transformed);
@@ -353,8 +353,6 @@ var dataTransform = function (data, start, end, interval, headers) {
     console.log("DATA", data);
     for (let i = 1; i < data.length; i++) {
         let urlIndex = Math.floor((i - 1) / datesbtn);
-		console.log("data[i]", data[i]);	
-		console.log("urlIndex", urlIndex, urls[urlIndex]);
         let results = data[i][urls[urlIndex].replace('/', '-') + '-intraday'].dataset.map((d) => d.value);
         results = [data[0].name, urls[urlIndex].replace('/', '-')].concat(results);
         finalData.push(results);
@@ -373,5 +371,6 @@ var dataTransform = function (data, start, end, interval, headers) {
     }
 
     console.log("Transform Done");
+	console.log("start and end after Transform", start, end);
     return final;
 };
