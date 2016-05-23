@@ -30,7 +30,7 @@ exports.registerUser = (res, user, db, callback) => {
     })
 };
 
-exports.refreshToken = (id) => {
+exports.refreshToken = (id, callback) => {
     exports.getUsers({
         "encodedId": id
     }, (u) => {
@@ -39,13 +39,15 @@ exports.refreshToken = (id) => {
             refresh.onload = function() {
                 let newRes = JSON.parse(this.responseText);
                 if (this.status = 200) {
+					console.log("got new refreshToken", newRes);
                     exports.registerUser(newRes, {
                         "user": {
                             "encodedId": id
                         }
-                    }, db, () => db.close())
+                    }, db, () => db.close());
+					callback(newRes);
                 } else {
-                    console.log('status ', this.status)
+                    console.log('Refresh Token Call: status ', this.status)
                 }
             }
             refresh.open("POST", "https://api.fitbit.com/oauth2/token");

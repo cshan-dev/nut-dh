@@ -18,7 +18,7 @@ var accessToken = "";
 var refreshToken = "";
 var username = "";
 var urls = ["activities/calories", "activities/distance", "activities/minutesSedentary", "activities/minutesLightlyActive", "activities/minutesFairlyActive", "activities/minutesVeryActive", "activities/heart", "activities/steps"];
-//var urls = ["activities/calories"]
+//var urls = ["activities/calories", "activities/heart"]
 let dbURL = 'mongodb://localhost:27017/tokens';
 const PORT = 22205;
 
@@ -94,7 +94,7 @@ router.get('/getAllData/:begin/:end/:interval', (req, res) => {
                 results.push(headers)
 
                 for (let i = 0; i < resultArray.length; i++) {
-                    results = results.concat(dataTransform(resultArray[i], datesbtn, results));
+                    results = results.concat(dataTransform(resultArray[i], datesbtn, headers));
                 }
 
                 res.send(results);
@@ -315,18 +315,60 @@ var formatDateTime = function(date) {
 }
 
 //Transforms the data from an array to one JSON object
-var dataTransform = function(data, datesbtwn) {
+var dataTransform = function(data, datesbtwn, headers) {
     let rowObj = {};
     let results = [];
     let curRow;
     let id = data[0].name;
     for (let i = 1; i < data.length; i++) {
         let urlIndex = Math.floor((i - 1) / datesbtwn);
-		console.log("urlIndex",urlIndex);
+		//console.log("urlIndex",urlIndex);
         let activity = urls[urlIndex].replace('/', '-');
-		console.log("data",data[i],"activity",activity);
+		//console.log("data",data[i],"activity",activity);
         if (rowObj[activity] === undefined) rowObj[activity] = [];
-        rowObj[activity] = rowObj[activity].concat(data[i][activity + '-intraday'].dataset.map((d) => d.value));
+		if (activity == "activities-heart") {
+			//put "." for times with no heart data
+			//FIXME this is a non-optimal solution
+			//I apologize for how disgusting this is
+			console.log("------------------START HEART PROCESSING-------------------");
+			var dayString = data[i]["activities-heart"][0]["dateTime"];
+			//var dayHeaders = headers.filter((el) => el.includes(dayString));
+			var dayDate = new Date(dayString);
+			dayDate.setDate(dayDate.getDate() + 1);
+			var nextDayString = dayDate.toISOString().split("T")[0];
+			var dayIndex = headers.indexOf(dayString + " 20:00:00");
+			var nextDayIndex = headers.indexOf(nextDayString + " 20:00:00", dayIndex);
+			console.log("dayString, nextDayString, dayIndex, nextDayIndex", dayString, nextDayString, dayIndex, nextDayIndex);
+			//ternary operator here catches the case where nextDay is -1
+			//should be -1 only when it's not found because headers end at nextDay + 19:59:00
+			var dayHeaders = headers.slice(dayIndex, (nextDayIndex === -1) ? headers.length : nextDayIndex);
+			console.log("dayHeaders begin, end, length", dayHeaders[0], dayHeaders[dayHeaders.length -1], dayHeaders.length);
+			var timeMap = new Map(dayHeaders.map((d, i) => [d.split(" ")[1], i]));
+			console.log("timeMap size", timeMap.size);
+			var result = Array.from([].fill.call({ length: dayHeaders.length }, "."));
+			console.log("result length after fill", result.length);
+			var dataset = data[i][activity + '-intraday'].dataset;
+			console.log("dataset begin, end, length", dataset[0], dataset[dataset.length - 1], dataset.length);
+			var numUndefined = 0;
+			data[i][activity + '-intraday'].dataset.forEach((d) => {
+				//timeMap.set(dayString + " " + d.time, d.value);
+				//if ( timeMap.get(dayString + " " + d.time) === undefined) {
+				if ( timeMap.get(d.time) === undefined) {
+						//console.log("this was undefined", dayString + " " + d.time)
+						numUndefined++;
+				}
+				//result[timeMap.get(dayString + " " + d.time)] = d.value;
+				result[timeMap.get(d.time)] = d.value;
+
+			});
+			console.log("numUndefined", numUndefined);
+			console.log("result length after populate", result.length);
+			console.log("original data length vs non '.' result length", data[i][activity + '-intraday'].dataset.length, result.filter((d) => d != ".").length);
+			rowObj[activity] = rowObj[activity].concat(result);
+			
+		} else {
+				rowObj[activity] = rowObj[activity].concat(data[i][activity + '-intraday'].dataset.map((d) => d.value));
+		}
     }
 
     for (let activity of Object.keys(rowObj)) {
@@ -335,6 +377,7 @@ var dataTransform = function(data, datesbtwn) {
         result.push(id);
         result.push(activity);
         result = result.concat(rowObj[activity]);
+
         results.push(result);
     }
     return results;
