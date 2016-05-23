@@ -17,8 +17,8 @@ var clientEncoded = "MjI3SDhEOmJmODg0ZmExMjBmMzE0MjE2OGEwOTgyNTdlMzRlYTEz";
 var accessToken = "";
 var refreshToken = "";
 var username = "";
-//var urls = ["activities/calories", "activities/distance", "activities/minutesSedentary", "activities/minutesLightlyActive", "activities/minutesFairlyActive", "activities/minutesVeryActive", "activities/heart", "activities/steps"];
-var urls = ["activities/calories", "activities/heart"]
+var urls = ["activities/calories", "activities/distance", "activities/minutesSedentary", "activities/minutesLightlyActive", "activities/minutesFairlyActive", "activities/minutesVeryActive", "activities/heart", "activities/steps"];
+//var urls = ["activities/calories", "activities/heart"]
 let dbURL = 'mongodb://localhost:27017/tokens';
 const PORT = 22205;
 
@@ -329,6 +329,8 @@ var dataTransform = function(data, datesbtwn, headers) {
 		if (activity == "activities-heart") {
 			//put "." for times with no heart data
 			//FIXME this is a non-optimal solution
+			//I apologize for how disgusting this is
+			console.log("------------------START HEART PROCESSING-------------------");
 			var dayString = data[i]["activities-heart"][0]["dateTime"];
 			//var dayHeaders = headers.filter((el) => el.includes(dayString));
 			var dayDate = new Date(dayString);
@@ -341,21 +343,28 @@ var dataTransform = function(data, datesbtwn, headers) {
 			//should be -1 only when it's not found because headers end at nextDay + 19:59:00
 			var dayHeaders = headers.slice(dayIndex, (nextDayIndex === -1) ? headers.length : nextDayIndex);
 			console.log("dayHeaders begin, end, length", dayHeaders[0], dayHeaders[dayHeaders.length -1], dayHeaders.length);
-			var timeMap = new Map(dayHeaders.map((d, i) => [d, i]));
+			var timeMap = new Map(dayHeaders.map((d, i) => [d.split(" ")[1], i]));
 			console.log("timeMap size", timeMap.size);
-			var result = [].fill.call({ length: dayHeaders.length }, ".");
+			var result = Array.from([].fill.call({ length: dayHeaders.length }, "."));
 			console.log("result length after fill", result.length);
+			var dataset = data[i][activity + '-intraday'].dataset;
+			console.log("dataset begin, end, length", dataset[0], dataset[dataset.length - 1], dataset.length);
+			var numUndefined = 0;
 			data[i][activity + '-intraday'].dataset.forEach((d) => {
 				//timeMap.set(dayString + " " + d.time, d.value);
-				if ( timeMap.get(dayString + " " + d.time) === undefined) {
-						console.log("this was undefined", dayString + " " + d.time)
+				//if ( timeMap.get(dayString + " " + d.time) === undefined) {
+				if ( timeMap.get(d.time) === undefined) {
+						//console.log("this was undefined", dayString + " " + d.time)
+						numUndefined++;
 				}
-				result[timeMap.get(dayString + " " + d.time)] = d.value;
+				//result[timeMap.get(dayString + " " + d.time)] = d.value;
+				result[timeMap.get(d.time)] = d.value;
 
 			});
+			console.log("numUndefined", numUndefined);
 			console.log("result length after populate", result.length);
-			console.log("result", result);
-			rowObj[activity] = rowObj[activity].concat(Array.from(result));
+			console.log("original data length vs non '.' result length", data[i][activity + '-intraday'].dataset.length, result.filter((d) => d != ".").length);
+			rowObj[activity] = rowObj[activity].concat(result);
 			
 		} else {
 				rowObj[activity] = rowObj[activity].concat(data[i][activity + '-intraday'].dataset.map((d) => d.value));

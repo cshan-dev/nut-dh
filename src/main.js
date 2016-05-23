@@ -121,6 +121,9 @@ $('#getData').click(function() {
         //if ($.fn.dataTable.isDataTable('#dataTable')) {
         //    table.destroy();
         //} else {
+		if (table) {
+			table.destroy();
+		}
             table = $("#dataTable").DataTable({
                 data: copied,
                 dom: 'Bfrtip',
