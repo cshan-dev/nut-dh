@@ -1,5 +1,8 @@
 language: node_js
 node_js:
     - "5"
+services:
+    - mongodb
 before_script:
     - npm install grunt-cli -g
+    - mongo mydb_test --eval 'db.addUser("travis", "test");'
