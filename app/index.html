@@ -28,7 +28,7 @@
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.1.2/css/buttons.dataTables.min.css">
 		
-		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Comfortaa" />
+		<link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
 		
 		<link href='https://fonts.googleapis.com/css?family=Raleway:500' rel='stylesheet' type='text/css'>
 		
@@ -54,12 +54,19 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">fitbit data manager</a>
+					<img src="logo.png" alt="logo" class="logo">
+					<a class="navbar-brand" href="#"><span id="place-logo">fitbit data manager</span></a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">Help</a></li>
+						<li class="move-nav"><a href="index.html" class="navbar-active">Dashboard</a></li>
+						<li class="move-nav"><a href="settings/index.html" class="navbar-inactive">Settings</a></li>
+						<li class="move-nav"><a href="profile/index.html" class="navbar-inactive">Profile</a></li>
+						<li class="move-nav"><a href="help/index.html" class="navbar-inactive">Help</a></li>
 					</ul>
+					<form class="navbar-form navbar-right">
+						<input type="text" class="form-control move-nav" placeholder="Search...">
+					</form>
 				</div>
 			</div>
 		</nav>
@@ -68,6 +75,12 @@
 			<div class="row">
 
 				<div class="col-sm-3 col-md-2 sidebar">
+					<ul class="nav nav-sidebar">
+						<li class="active"><a href="overview/index.html">Overview <span class="sr-only">(current)</span></a></li>
+						<li class="active"><a href="reports/index.html">Reports</a></li>
+						<li class="active"><a href="analytics/index.html">Analytics</a></li>
+						<li class="active"><a href="">Export</a></li>
+					</ul>
 					<!--Input boxes for start and end date-->
 					<h1 class="input-label">Start Date</h1>
 					<input type="date" id="start_date" class="form-control input-box"></input>
@@ -81,7 +94,6 @@
 					<!--End input boxes-->
 					<!--Buttons for testing data retrieval-->
 					<br>
-					<br>
 					<div id="fitbit-home-description">
 						<a href="#" class="btn brd white-solid" alt="Get Data" id="getData"><span id="move">Get Data</span></a>
 						<br>
@@ -90,11 +102,8 @@
 					<!--End buttons for testing-->
 				</div>
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				
 					<div class="row container-fluid">
-						<header id="header-display" class="text-center"> 
-							<h1>Data Table</h1>
-						</header>
+						<h1 class="page-header">Dashboard</h1>
 						<table class="display" id="dataTable">
 						</table>	
 						</div>
@@ -103,7 +112,7 @@
 		</div>		
 		<footer class="footer">
 			<div class="container">
-				<p class="text-muted">Property of University of Delaware 2016</p>
+				<p class="text-muted">&copy;2016 University of Delaware. All rights reserved.</p>
 			</div>
 		</footer>
 		
