@@ -32,6 +32,8 @@ function getUTC(date) {
     var date_utc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
     return date_utc;
 }
+exports.getUTC = getUTC;
+
 router.get('/getAllData/:begin/:end/:interval', (req, res) => {
     let start = new Date(req.params.begin).getTime();
     let end = new Date(req.params.end).getTime();
@@ -106,6 +108,7 @@ router.get('/getAllData/:begin/:end/:interval', (req, res) => {
         }, 500)
     })();
 });
+//tested
 
 let generateHeaders = (start, end, interval) => {
     let fields = ["ID", "Activity"];
@@ -134,6 +137,7 @@ router.get('/getHeartRates', (req, res) => {
             });
     });
 });
+//tested
 
 //Gets the Authorization Code from when a user authorizes our app
 //Uses the Authorization Code to get the access and refresh tokens for the user
@@ -178,6 +182,7 @@ router.get('/post_tokens', function(req, res) {
 
     res.redirect("/");
 });
+//tested
 
 //Not for use in final build
 router.get('/getHeart/:begin/:end', function(req, res) {
@@ -197,6 +202,7 @@ router.get('/getHeart/:begin/:end', function(req, res) {
     xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
     xhr.send();
 });
+//tested
 
 //Not for use in final build
 router.get('/getSteps/:begin/:end', function(req, res) {
@@ -220,6 +226,7 @@ router.get('/getSteps/:begin/:end', function(req, res) {
     xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
     xhr.send();
 });
+//tested
 
 var padZero = (val) => val < 10 ? "0" + val : val;
 
@@ -238,6 +245,7 @@ var formatDate = function(date) {
     var year = date.getFullYear();
     return year + "-" + month + "-" + day;
 }
+exports.formatDate = formatDate;
 
 //Sends a specific API request to get user data
 var getActivityData = function(url, sd, ed, interval) {
@@ -257,6 +265,7 @@ var getActivityData = function(url, sd, ed, interval) {
         xhr.send();
     });
 };
+exports.getActivityData = getActivityData;
 
 //Loops through all API calls and all dates in date range
 //Adds all data to the data array
@@ -278,6 +287,8 @@ var loopUrls = function(index, sd, ed, interval, res) {
         });
 };
 
+exports.loopUrls = loopUrls;
+
 //Route called to get all user data
 router.get('/getData/:begin/:end/:interval', function(req, res) {
     var start = req.params.begin;
@@ -288,6 +299,7 @@ router.get('/getData/:begin/:end/:interval', function(req, res) {
     data.push(JSON.parse("{\"name\": \"" + username + "\"}"));
     loopUrls(0, sd, ed, interval, res);
 });
+//tested
 
 router.listen(PORT, function() {
     console.log("Server listening on port " + PORT);
@@ -313,6 +325,7 @@ var formatDateTime = function(date) {
 
     return year + "-" + month + "-" + day + " " + hours + ":" + mins + ":" + secs;
 }
+exports.formatDateTime = formatDateTime;
 
 //Transforms the data from an array to one JSON object
 var dataTransform = function(data, datesbtwn, headers) {
@@ -382,3 +395,4 @@ var dataTransform = function(data, datesbtwn, headers) {
     }
     return results;
 };
+exports.dataTransform = dataTransform;
