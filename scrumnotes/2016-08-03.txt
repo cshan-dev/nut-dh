@@ -1,0 +1,5 @@
+eric - did:git howto, gonna:deal with user data,blocking:api access
+corey - did:nada,gonna:pivot table sample,blocking:sample data
+becca - did:got fitbit, gonna:req doc and css,blocking:corey and josh example
+josh - did:glanced at pivotjs and pivottablejs,gonna:build example with one of the libraries,blocking:sample data
+mark - did:nada,gonna:fitbit api and register users/pull data,blocking:authentication is hard

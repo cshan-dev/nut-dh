@@ -1,0 +1,204 @@
+body {
+	/*padding-top: 40px;*/
+	padding-bottom: 40px;
+	background-color: #eee;
+  
+  	padding-top: 50px;
+  
+	/* Margin bottom by footer height */
+	margin-bottom: 60px;
+}
+
+.form-signin {
+	max-width: 330px;
+	padding: 15px;
+	margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+	margin-bottom: 10px;
+}
+.form-signin .checkbox {
+	font-weight: normal;
+}
+.form-signin .form-control {
+	position: relative;
+	height: auto;
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 10px;
+	font-size: 16px;
+}
+.form-signin .form-control:focus {
+	z-index: 2;
+}
+.form-signin input[type="email"] {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.contain {
+    background: #fff;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.03);
+    font-size: 13px;
+    line-height: 1.4em;
+    margin: 0 auto;
+    padding: 0 40px;
+    width: 480px;
+	margin-top: 50px;
+	padding-bottom: 50px;
+}
+
+/*
+ * Global add-ons
+ */
+
+.sub-header {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eee;
+}
+
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+	border: 0;
+}
+
+.navbar-header {
+	background-color: #e2e2e2;
+	position: relative;
+}
+
+.navbar-collapse {
+	background-color: #e2e2e2;
+}
+
+.navbar-brand {
+	background-color: #e2e2e2;
+	color: black !important;
+	text-shadow: none !important;
+	font-family: 'Comfortaa', cursive;
+	font-size: 28px;
+	left: 50px;
+	position: relative;
+}
+
+.navbar-right {
+	background-color: #e2e2e2;
+}
+
+.navbar-brand:hover {
+	color: #00b0b9 !important;
+	text-shadow: none;
+}
+.navbar-inverse .navbar-nav>li>a {
+	color: #576569 !important;
+	font-family: 'Raleway', sans-serif;
+	font-size: 1em;
+	text-shadow: none;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+	color: #00b0b9 !important;
+	text-shadow: none;
+}
+
+.form-control {
+	color: #576569 !important;
+	font-family: 'Raleway', sans-serif;
+	font-size: 1em;
+	text-shadow: none;
+}
+
+.form-signin-heading {
+	font-family: 'Raleway', sans-serif;
+	text-align: center;
+}
+
+.checkbox {
+	font-family: 'Raleway', sans-serif;
+}
+
+.btn {
+	background-color: #ee3d6e;
+	font-family: 'Raleway', sans-serif;
+	border: none;
+	width: 100px;
+	border-radius: 25px;
+	height: 40px;
+	font-size: 13px;
+	font-weight: bold;
+	float: right;
+}
+
+.btn:hover {
+	background-color: #DB1255 !important;
+}
+
+.btn:active {
+	background-color: #DB1255 !important;
+}
+
+.btn:focus {
+	background-color: #DB1255 !important;
+}
+
+.btn:active, .btn-lg:active, .btn-primary:active, .btn-block:active, .btn:focus, .btn-lg:focus, .btn-primary:focus, .btn-block:focus {
+	background-color: #DB1255 !important;
+}
+
+.logo {
+	height: 30px;
+	width: 30px;
+	right: 280px;
+	top: 10px;
+	position: relative;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+	position: relative;
+	min-height: 100%;
+}
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	/* Set the fixed height of the footer here */
+	height: 60px;
+	background-color: #e2e2e2;
+}
+
+.footer p {
+	position: relative;
+	top: 20px;
+	text-align: center;
+	font-family: 'Raleway', sans-serif;
+	color: #576569 !important;
+}
+
+
+#place-logo {
+	position: relative;
+	right: 12px;
+}
+
+button a {
+	text-decoration: none;
+	color: white;
+}
+
+button a:hover {
+	text-decoration: none;
+	color: white;
+}

@@ -1,0 +1,283 @@
+/*
+ * Base structure
+ */
+
+ /* Move down content because we have a fixed navbar that is 50px tall */
+body {
+	padding-top: 50px;
+  
+	/* Margin bottom by footer height */
+	margin-bottom: 60px;
+}
+
+/*
+ * Global add-ons
+ */
+
+.sub-header {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eee;
+}
+
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+	border: 0;
+}
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+	display: none;
+}
+@media (min-width: 768px) {
+	.sidebar {
+		position: fixed;
+		top: 51px;
+		bottom: 0;
+		left: 0;
+		z-index: 1000;
+		display: block;
+		padding: 20px;
+		overflow-x: hidden;
+		overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+		background-color: #f5f5f5;
+		border-right: 1px solid #eee;
+	}
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+	margin-right: -21px; /* 20px padding + 1px border */
+	margin-bottom: 20px;
+	margin-left: -20px;
+}
+.nav-sidebar > li > a {
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+
+/*
+ * Main content
+ */
+
+.main {
+	padding: 20px;
+}
+@media (min-width: 768px) {
+	.main {
+		padding-right: 40px;
+		padding-left: 40px;
+	}
+}
+.main .page-header {
+	margin-top: 0;
+	font-family: 'Raleway', sans-serif;
+}
+
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+	margin-bottom: 30px;
+	text-align: center;
+}
+.placeholders h4 {
+	margin-bottom: 0;
+}
+.placeholder {
+	margin-bottom: 20px;
+}
+.placeholder img {
+	display: inline-block;
+	border-radius: 50%;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+	position: relative;
+	min-height: 100%;
+}
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	/* Set the fixed height of the footer here */
+	height: 60px;
+	background-color: #e2e2e2;
+}
+
+.footer p {
+	position: relative;
+	top: 20px;
+	text-align: center;
+	left: 100px;
+	font-family: 'Raleway', sans-serif;
+	color: #576569 !important;
+}
+
+.navbar-header {
+	background-color: #e2e2e2;
+	position: relative;
+}
+
+.navbar-collapse {
+	background-color: #e2e2e2;
+}
+
+.navbar-brand {
+	background-color: #e2e2e2;
+	color: black !important;
+	text-shadow: none !important;
+	font-family: 'Comfortaa', cursive;
+	font-size: 28px;;
+	left: 50px;
+	position: relative;
+}
+
+.navbar-right {
+	background-color: #e2e2e2;
+}
+
+.navbar-brand:hover {
+	color: #00b0b9 !important;
+	text-shadow: none;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+	color: #00b0b9 !important;
+	text-shadow: none;
+}
+
+.form-control {
+	color: #576569 !important;
+	font-family: 'Raleway', sans-serif;
+	font-size: 1em;
+	text-shadow: none;
+}
+
+.nav-sidebar {
+	background-color: #00b0b9;
+}
+
+.sidebar {
+	background-color: #00b0b9;
+}
+
+.nav-sidebar>li>a {
+	color: white !important;
+	font-family: 'Raleway', sans-serif;
+}
+
+.nav-sidebar > .active > a:focus {
+	background-color: #ee3d6e;
+}
+
+.nav-sidebar > .active > a:hover {
+	background-color: #3ba3ac;
+}
+
+.nav-sidebar > .active > a:active {
+	background-color: #ee3d6e;
+}
+
+.input-label {
+	color: #fff !important;
+	font-family: 'Raleway', sans-serif;
+	font-size: 1em;
+	text-shadow: none;
+}
+
+.input-box:focus {
+	border-color: #ee3d6e;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+}
+
+#fitbit-home-description a.btn.white-solid {
+    background: #fff;
+    color: #ef3d6f;
+    padding: 8px 49px 7px;
+    font-size: 14px;
+}
+#fitbit-home-description a.btn.white-solid:hover {
+	background: #00b0b9;
+	color: #fff;
+}
+a.btn.brd{
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    color: #fff;
+    padding: 8px 20px 7px;
+    border: 3px solid #fff;
+}
+a.btn {
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    margin: 0;
+	font-family: 'Raleway', sans-serif;
+    font-size: 12px;
+    line-height: 15px;
+    color: #f54785;
+    text-decoration: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    z-index: 1;
+	font-weight: bold;
+	width: 75px;
+}
+
+#move {
+	position: relative;
+	right: 33px;
+}
+
+.logo {
+	height: 30px;
+	width: 30px;
+	right: 280px;
+	top: 10px;
+	position: relative;
+}
+
+.move-nav {
+	position: relative;
+	right: 30px;
+}
+
+.navbar-active {
+	color: #00b0b9 !important;
+	text-shadow: none !important;
+	font-family: 'Raleway', sans-serif;
+	font-size: 1em;
+}
+
+.navbar-inactive {
+	color: #576569 !important;
+	font-family: 'Raleway', sans-serif;
+	font-size: 1em;
+	text-shadow: none !important;
+}
+
+#place-logo {
+	position: relative;
+	right: 12px;
+}
+
+#connected-users {
+	font-family: 'Raleway', sans-serif;
+}
+
+.sidebar-active {
+	background-color: #ee3d6e;
+}
